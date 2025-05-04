@@ -1,0 +1,252 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+:root {
+    --color-bg-light: #f9fafc;
+    /* fondo normal */
+    --color-bg-dark: #333;
+    --color-sb-light: #ffffff;
+    /* fondo de la sidebar */
+    --color-sb-dark: #2d2d2d;
+    --color-text-light: #333;
+    /* texto normal */
+    --color-text-dark: #f9fafc;
+    --color-primary-light: #ff94ac;
+    /*ff7b9d*/
+    --color-primary-dark: #ff7b9d;
+    /* color cuando selecciono un step del form */
+    --color-card-header: #343a40;
+    /* header form */
+    --color-step-light: #e9ecef;
+    /* color step claro */
+    --color-step-dark: #666667;
+    /* color step oscuro */
+    --color-form-dark: #3b3b3b;
+    /* no me acuerdo */
+    --color-form-border: #444;
+    /* borde del form oscuro */
+}
+ 
+/* Colores para el modo oscuro */
+.dark-mode {
+    --color-bg-dark: #333333; /* Fondo oscuro */
+    --color-text-dark: #ffffff; /* Texto blanco */
+}
+
+.rowa{
+    gap: 20px;
+}
+
+/* Tabla en modo claro */
+.table {
+    background-color: var(--color-bg-light) !important;
+    color: var(--color-text-light) !important;
+}
+
+/* Tabla en modo oscuro */
+.dark-mode .table {
+    background-color: var(--color-bg-dark) !important;
+    color: var(--color-text-dark) !important;
+}
+
+/* Otros estilos adicionales */
+.table th, .table td {
+    background-color: var(--color-bg-light) !important;
+    color: var(--color-text-light) !important;
+}
+
+/* En modo oscuro */
+.dark-mode .table th, .dark-mode .table td {
+    background-color: var(--color-bg-dark) !important;
+    color: var(--color-text-dark) !important;
+}
+
+* {
+    font-family: "Host Grotesk", 'Times New Roman', Times, serif !important;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 17.5rem;
+    /* 280px */
+    height: 100vh;
+    background-color: var(--color-sb-light);
+    padding: 1.25rem;
+    /* 20px */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.sidebar h2 {
+    margin-bottom: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* //botones esos */
+.btn-primary {
+    background-color: var(--color-primary-light) !important;
+    color: var(--color-text-dark) !important;
+    border: none !important;
+}
+
+.dark-mode .btn-primary {
+    background-color: var(--color-primary-dark) !important;
+    color: var(--color-text-light) !important;
+    border: none !important;
+}
+
+.btn-outline-primary {
+    color: var(--color-primary-light) !important;
+    border-color: var(--color-primary-light) !important;
+}
+
+.dark-mode .btn-outline-primary {
+    color: var(--color-primary-dark) !important;
+    border-color: var(--color-primary-dark) !important;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    background-color: #e3879b !important;
+    color: var(--color-bg-light) !important;
+    border-color: #e3879b !important;
+}
+
+.dark-mode .btn-primary:hover,
+.dark-mode .btn-outline-primary:hover {
+    background-color: #db6d89 !important;
+    color: var(--color-text-dark) !important;
+    border-color: #db6d89 !important;
+}
+
+/* modo claro */
+body {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-light);
+}
+
+/* modo oscuro */
+body.dark-mode {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark);
+}
+
+/* botón modo oscuro */
+.mode-toggle {
+    background-color: var(--color-primary-light);
+    color: var(--color-text-dark);
+    border: none;
+    padding: 0.625rem 0.9375rem;
+    /* 10px 15px */
+    border-radius: 0.3125rem;
+    /* 5px */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 1.25rem;
+    /* 20px */
+}
+
+body.dark-mode .mode-toggle {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+}
+
+/* contenido principal */
+.content {
+    padding: 1.25rem;
+    /* 20px */
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* estilos de las listas */
+.dropdown-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.dropdown-input {
+    padding-right: 30px;
+    /* Espacio para el ícono */
+}
+
+.dropdown-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #6c757d;
+    font-family: 'Bootstrap Icons';  /* Asegúrate de usar la fuente correcta */
+
+}
+
+.options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--color-form-dark);
+    border: 1px solid var(--color-form-border) !important;
+    z-index: 1;
+    color: var(--color-text-dark);
+}
+
+.option {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #333;
+}
+
+.no-results {
+    padding: 10px;
+    color: #999;
+    text-align: center;
+}
+
+.container-liquidaciones{
+    width: 56.25rem !important;
+}
+
+.card-liquidaciones{
+    width: 56.25rem;
+}
+
+/* pantallas pequeñas */
+@media (min-width: 48.0625rem) {
+
+    /* 769px */
+    .main-container {
+        flex-direction: row;
+    }
+}
+
+.titlebutton {
+    display: flex;
+    justify-content: space-between;
+}

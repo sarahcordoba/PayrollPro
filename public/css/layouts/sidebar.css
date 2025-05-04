@@ -1,0 +1,122 @@
+body.dark-mode .sidebar {
+    background-color: var(--color-sb-dark);
+    color: var(--color-text-dark);
+}
+
+/* logo y sus vainas */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+
+.logo h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-text-light);
+}
+
+body.dark-mode .logo h2 {
+    color: var(--color-text-dark);
+}
+
+/* lista de navegación */
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.nav-list li {
+    margin-bottom: 15px;
+}
+
+.nav-list li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .nav-list li a {
+    color: var(--color-text-dark);
+}
+
+.nav-list li a:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-text-dark);
+}
+
+body.dark-mode .nav-list li a:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+}
+
+
+/* pantallas pequeñas */
+@media (max-width: 768px) {
+    .sidebar {
+        left: -280px;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .sidebar-toggle {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        background-color: transparent;
+        color: var(--color-text-light);
+        border: none;
+    }
+
+    .dark-mode .sidebar-toggle {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        background-color: transparent;
+        color: var(--color-text-dark);
+        border: none;
+    }
+
+    .content {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+}
+
+/* pantalla normal */
+@media (min-width: 769px) {
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+    }
+
+    .sidebar-toggle {
+        display: none;
+    }
+
+    .content{
+        padding-left: 280px
+    }
+}

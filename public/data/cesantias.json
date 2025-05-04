@@ -1,0 +1,26 @@
+[
+    {
+        "id": "230201",
+        "nombre": "PROTECCIÓN"
+    },
+    {
+        "id": "230301",
+        "nombre": "PORVENIR"
+    },
+    {
+        "id": "230901",
+        "nombre": "OLD MUTUAL (ANTES SKANDIA)"
+    },
+    {
+        "id": "231001",
+        "nombre": "COLFONDOS"
+    },
+    {
+        "id": "FNA",
+        "nombre": "Fondo nacional del ahorro"
+    },
+    {
+        "id": "FPSM",
+        "nombre": "Fondo de prestaciones sociales del magisterio"
+    }
+]

@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start XAMPP Apache",
+            "type": "shell",
+            "command": "C:/xampp/apache_start.bat",
+            "problemMatcher": [],
+            "detail": "Start Apache server via XAMPP"
+        },
+        {
+            "label": "Start XAMPP MySQL",
+            "type": "shell",
+            "command": "C:/xampp/mysql_start.bat",
+            "problemMatcher": [],
+            "detail": "Start MySQL server via XAMPP"
+        },
+        {
+            "label": "Serve Laravel",
+            "type": "shell",
+            "command": "php",
+            "args": ["artisan", "serve"],
+            "problemMatcher": [],
+            "detail": "Serve the Laravel application"
+        },
+        {
+            "label": "Start XAMPP Services and Serve Laravel",
+            "dependsOn": ["Start XAMPP Apache", "Start XAMPP MySQL", "Serve Laravel"],
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }
+    ]
+}

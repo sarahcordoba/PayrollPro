@@ -1,0 +1,3 @@
+web: vendor/bin/heroku-php-nginx public/
+web: vendor/bin/heroku-php-apache2 public/ --ssl
+web: npm install && npm run prod && heroku-php-apache2 public/

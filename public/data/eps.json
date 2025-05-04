@@ -1,0 +1,152 @@
+[
+  {
+    "codigo": "CCF033",
+    "nombre": "EPS FAMILIAR DE COLOMBIA S.A.S.",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "CCF050",
+    "nombre": "CAJA DE COMPENSACIÓN FAMILIAR DEL ORIENTE COLOMBIANO 'COMFAORIENTE'",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "CCF055",
+    "nombre": "CAJACOPI EPS S.A.S",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "CCF102",
+    "nombre": "CAJA DE COMPENSACIÓN FAMILIAR DEL CHOCÓ",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPS025",
+    "nombre": "CAPRESOCA E.P.S.",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSI01",
+    "nombre": "ASOCIACIÓN DE CABILDOS INDÍGENAS DEL CESAR Y GUAJIRA 'DUSAKAWI A.R.S.I.'",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSI03",
+    "nombre": "ASOCIACIÓN INDÍGENA DEL CAUCA A.I.C. EPSI",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSI04",
+    "nombre": "EMPRESA PROMOTORA DE SALUD INDÍGENA ANAS WAYUU EPSI",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSI05",
+    "nombre": "ENTIDAD PROMOTORA DE SALUD MALLAMAS EPSI",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSI06",
+    "nombre": "PIJAOS SALUD EPSI",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSS01",
+    "nombre": "ALIANSALUD EPS S.A.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS02",
+    "nombre": "SALUD TOTAL ENTIDAD PROMOTORA DE SALUD DEL REGIMEN CONTRIBUTIVO Y DEL REGIMEN SUBSIDIADO S.A.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS05",
+    "nombre": "ENTIDAD PROMOTORA DE SALUD SANITAS S.A.S.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS08",
+    "nombre": "CAJA DE COMPENSACIÓN FAMILIAR COMPENSAR",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS10",
+    "nombre": "EPS SURAMERICANA S.A.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS12",
+    "nombre": "CAJA DE COMPENSACION FAMILIAR DEL VALLE DEL CAUCA 'COMFENALCO VALLE DE LA GENTE'",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS17",
+    "nombre": "EPS FAMISANAR S.A.S.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS18",
+    "nombre": "ENTIDAD PROMOTORA DE SALUD SERVICIO OCCIDENTAL DE SALUD S.A. S.O.S.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS34",
+    "nombre": "CAPITAL SALUD ENTIDAD PROMOTORA DE SALUD DEL RÉGIMEN SUBSIDIADO SAS 'CAPITAL SALUD EPS-S S.A.S.'",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSS37",
+    "nombre": "NUEVA EPS S.A.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS40",
+    "nombre": "ALIANZA MEDELLIN ANTIOQUIA EPS S.A.S. 'SAVIA SALUD EPS'",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSS41",
+    "nombre": "NUEVA EPS S.A.",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "EPSS42",
+    "nombre": "COOSALUD EPS S.A.",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS46",
+    "nombre": "FUNDACIÓN SALUD MIA",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS47",
+    "nombre": "SALUD BOLÍVAR EPS SAS",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "EPSS48",
+    "nombre": "ASOCIACION MUTUAL SER EMPRESA SOLIDARIA DE SALUD ENTIDAD PROMOTORA DE SALUD - MUTUAL SER EPS",
+    "regimen": "SBS - CM"
+  },
+  {
+    "codigo": "ESS024",
+    "nombre": "COOSALUD EPS S.A.",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "ESS062",
+    "nombre": "ASMET SALUD EPS S.A.S.",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "ESS118",
+    "nombre": "EMSSANAR S.A.S.",
+    "regimen": "SBS"
+  },
+  {
+    "codigo": "ESS207",
+    "nombre": "ASOCIACION MUTUAL SER EMPRESA SOLIDARIA DE SALUD ENTIDAD PROMOTORA DE SALUD - MUTUAL SER EPS",
+    "regimen": "SBS"
+  }
+]

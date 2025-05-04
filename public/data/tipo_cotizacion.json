@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "description": "Dependiente"
+    },
+    {
+        "id": 3,
+        "description": "Independiente"
+    },
+    {
+        "id": 12,
+        "description": "Aprendices del SENA en etapa lectiva"
+    },
+    {
+        "id": 16,
+        "description": "Independiente agremiado o asociado"
+    },
+    {
+        "id": 19,
+        "description": "Aprendices del SENA en etapa productiva"
+    },
+    {
+        "id": 21,
+        "description": "Estudiantes de postgrado en salud (Decreto 190 de 1996)"
+    },
+    {
+        "id": 2,
+        "description": "Servicio doméstico"
+    },
+    {
+        "id": 4,
+        "description": "Madre comunitaria"
+    },
+    {
+        "id": 15,
+        "description": "Desempleado con subsidio de Caja de Compensación Familiar"
+    },
+    {
+        "id": 18,
+        "description": "Funcionarios públicos sin tope máximo en el IBC"
+    },
+    {
+        "id": 20,
+        "description": "Estudiantes (Régimen Especial – Ley 789/2002)"
+    },
+    {
+        "id": 22,
+        "description": "Profesor de establecimiento particular"
+    },
+    {
+        "id": 31,
+        "description": "Cooperados o PreCooperativas de trabajo asociado"
+    },
+    {
+        "id": 33,
+        "description": "Beneficiario del Fondo de Solidaridad Pensional"
+    },
+    {
+        "id": 40,
+        "description": "Beneficiario UPC adicional"
+    },
+    {
+        "id": 42,
+        "description": "Cotizante pago solo de salud (Artículo 2, Ley 1250 de 2008)"
+    },
+    {
+        "id": 44,
+        "description": "Cotizante dependiente de Empleo de Emergencia con duración mayor o igual a un mes"
+    },
+    {
+        "id": 30,
+        "description": "Dependiente, entidades o universidades públicas con régimen especial en salud"
+    },
+    {
+        "id": 32,
+        "description": "Cotizante miembro de la carrera diplomática o consular de un país extranjero, o funcionario multilateral no sometido a legislación colombiana"
+    },
+    {
+        "id": 34,
+        "description": "Concejal amparado por una póliza de salud"
+    },
+    {
+        "id": 41,
+        "description": "Cotizante independiente sin ingresos con pago por terceros"
+    },
+    {
+        "id": 43,
+        "description": "Cotizante independiente no obligado a cotizar pensiones con pago por terceros"
+    },
+    {
+        "id": 47,
+        "description": "Trabajador dependiente de una entidad beneficiaria del Sistema General de Participaciones - Aportes Patronales"
+    },
+    {
+        "id": 45,
+        "description": "Cotizante dependiente de Empleo de Emergencia con duración menor a un mes"
+    }
+]

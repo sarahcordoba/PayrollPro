@@ -1,0 +1,18 @@
+.lefte-div{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mede-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-index-empleados{
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
