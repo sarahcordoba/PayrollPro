@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'webRoster')</title>
+    <title>@yield('title', 'PayrollPro')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/layouts/sidebar.css') }}">
@@ -42,7 +42,7 @@
         <div class="sidebar">
             <div class="logo">
                 <img src="{{ asset('images/logo.svg') }}" alt="webRoster Logo">
-                <h2>webRoster</h2>
+                <h2>PayrollPro</h2>
             </div>
             {{-- lista de vainos --}}
             <ul class="nav-list">
