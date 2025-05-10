@@ -1,7 +1,7 @@
 # PayrollPro
 
 ## Instalación
-Primero, deben clonar repositorio en htdocs en xampp.
+Primero, se debe clonar el repositorio en la carpeta htdocs.
 
 Luego, abrir en vscode y ejecutar los isguientes comandos:
 
@@ -82,7 +82,7 @@ VITE_APP_NAME="${APP_NAME}"
 
 >[!NOTE]
 >
->Tienen que cambiar esos datos dependiendo de su vaina
+>Tienen que cambiar esos datos dependiendo de su configuración de xampp (ej otro numero de puerto)
  
 Luego, ponen este comando:
 
@@ -96,7 +96,7 @@ Por últimol, corren este comando:
 php artisan migrate
 ``
 ## Ejecución
-Para correr la vaina esa deben tener siempre siempre siempreeeeeeeeeeeeeeeeeeeeeee corriendo el xampp con Apache y Mysql y se corre el servidor con:
+Para correr el proyecto deben tener siempre siempre siempreeeeeeeeeeeeeeeeeeeeeee corriendo el xampp con Apache y Mysql y se corre el servidor con:
 
 
 ``
