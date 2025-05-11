@@ -16,19 +16,24 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="{{ asset('images/logo.svg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/pato.svg') }}" type="image/x-icon">
     <link
         href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Koulen&display=swap"
         rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Koulen&family=Tiny5&display=swap"
         rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
 </head>
@@ -41,17 +46,17 @@
         {{-- div sidebar --}}
         <div class="sidebar">
             <div class="logo">
-                <img src="{{ asset('images/logo.svg') }}" alt="webRoster Logo">
+                <img src="{{ asset('images/pato.svg') }}" alt="PayrollPro Logo">
                 <h2>PayrollPro</h2>
             </div>
             {{-- lista de vainos --}}
             <ul class="nav-list">
                 @foreach ($menuItems as $item)
-                <li>
-                    <a href="{{ $item['url'] }}">
-                        <i class="{{ $item['icon'] }}"></i> {{ $item['name'] }}
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{ $item['url'] }}">
+                            <i class="{{ $item['icon'] }}"></i> {{ $item['name'] }}
+                        </a>
+                    </li>
                 @endforeach
             </ul>
             {{-- botón de modo oscuro --}}
@@ -62,7 +67,8 @@
             </form>
 
             <!-- Button to trigger the logout form -->
-            <button id="modeToggle" class="mode-toggle" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+            <button id="modeToggle" class="mode-toggle"
+                onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                 Salir
             </button>
         </div>

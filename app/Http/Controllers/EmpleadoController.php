@@ -71,7 +71,8 @@ class EmpleadoController extends Controller
             'fondo_pensiones' => 'required|string',
             'fondo_cesantias' => 'required|string',
         ], [
-            'correo.unique' => 'El correo electrónico ya está registrado. Por favor, ingrese otro.'
+            'correo.unique' => 'El correo electrónico ya está registrado. Por favor, ingrese otro.',
+            'numero_identificacion' => 'Ya existe un empleado con el número de identificación ingresado.'
         ]);
 
         // Add the idEmpleador from the authenticated user
@@ -124,17 +125,21 @@ class EmpleadoController extends Controller
     // Actualizar un empleado existente
     public function update(Request $request, $id)
     {
+        $empleado = Empleado::findOrFail($id);
+
+        $data = $request->all();
+        
         $request->validate([
             'primer_nombre' => 'required|string|max:255',
             'segundo_nombre' => 'nullable|string|max:255',
             'primer_apellido' => 'required|string|max:255',
-            'segundo_apellido' => 'required|string|max:255',
+            'segundo_apellido' => 'nullable|string|max:255',
             'tipo_identificacion' => 'required|string',
-            'numero_identificacion' => 'required|numeric|unique:empleados,numero_identificacion',
+            'numero_identificacion' => 'required|numeric|unique:empleados,numero_identificacion,' . $empleado->id,
             'municipio' => 'required|string',
             'direccion' => 'required|string|max:255',
             'celular' => 'required|numeric',
-            'correo' => 'required|email|unique:empleados,correo',
+            'correo' => 'required|email|unique:empleados,correo,' . $empleado->id,
             'tipo_contrato' => 'required|string',
             'fecha_contratacion' => 'required|date',
             'fecha_fin_contrato' => 'nullable|date|after_or_equal:fecha_contratacion',
@@ -160,10 +165,17 @@ class EmpleadoController extends Controller
             'fondo_cesantias' => 'required|string',
         ]);
 
-        $empleado = Empleado::findOrFail($id);
-        $empleado->update($request->all());
+        if ($request->metodo_pago == 'pago_efectivo') {
+            $data['banco'] = null;
+            $data['numero_cuenta'] = null;
+            $data['tipo_cuenta'] = null;
+        }
+
+        $empleado->update($data);
+        // $empleado->update($request->all());
 
         return redirect()->route('empleados.index')->with('success', 'Empleado actualizado con éxito.');
+        Log::info('Empleado que se está editando:', ['municipio' => $empleado->municipio]);
     }
 
     // Eliminar un empleado existente

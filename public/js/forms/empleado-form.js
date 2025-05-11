@@ -25,7 +25,7 @@ function prevForm(event) {
             updateButtons();
             document.querySelector('.progress-bar-fill').style.width = (currentStep / 3 * 100) + '%';
         }
-    }   
+    }
 }
 
 function updateSteps() {
@@ -67,23 +67,59 @@ window.onload = function () {
 
 
 // para que la fecha de fin de contrsto sea posterior a la fecha de inicio de ocntraro
-document.addEventListener('DOMContentLoaded', (event) => {
+// document.addEventListener('DOMContentLoaded', (event) => {
+//     const hiringDateInput = document.getElementById('fecha_contratacion');
+//     const contractEndDateInput = document.getElementById('fecha_fin_contrato');
+
+//     contractEndDateInput.addEventListener('change', validateDates);
+//     hiringDateInput.addEventListener('change', validateDates);
+
+//     function validateDates() {
+//         const hiringDate = new Date(hiringDateInput.value);
+//         const contractEndDate = new Date(contractEndDateInput.value);
+//         console.log(hiringDate);
+//         console.log(contractEndDate);
+
+//         if (contractEndDate < hiringDate) {
+//             showToast('La fecha de fin de contrato debe ser posterior a la fecha de contratación.');
+//             contractEndDateInput.value = ''; // Clear the invalid date
+//         }
+//     }
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
     const hiringDateInput = document.getElementById('fecha_contratacion');
     const contractEndDateInput = document.getElementById('fecha_fin_contrato');
 
-    contractEndDateInput.addEventListener('change', validateDates);
-    hiringDateInput.addEventListener('change', validateDates);
+    contractEndDateInput.addEventListener('blur', validateDates);
+    hiringDateInput.addEventListener('blur', validateDates);
+
+    function isValidDateFormat(dateStr) {
+        return /^\d{4}-\d{2}-\d{2}$/.test(dateStr) && !isNaN(new Date(dateStr).getTime());
+    }
 
     function validateDates() {
-        const hiringDate = new Date(hiringDateInput.value);
-        const contractEndDate = new Date(contractEndDateInput.value);
+        const hiringDateStr = hiringDateInput.value;
+        const contractEndDateStr = contractEndDateInput.value;
+
+        // No validar si uno de los dos está vacío o incompleto
+        if (!isValidDateFormat(hiringDateStr) || !isValidDateFormat(contractEndDateStr)) {
+            return;
+        }
+
+        const hiringDate = new Date(hiringDateStr);
+        const contractEndDate = new Date(contractEndDateStr);
+
+        console.log(hiringDate);
+        console.log(contractEndDate);
 
         if (contractEndDate < hiringDate) {
             showToast('La fecha de fin de contrato debe ser posterior a la fecha de contratación.');
-            contractEndDateInput.value = ''; // Clear the invalid date
+            contractEndDateInput.value = ''; // Limpiar la fecha inválida
         }
     }
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamar a las funciones necesarias al cargar la página
@@ -126,22 +162,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-//para cargar cosas
+// //para cargar cosas
+// async function cargarMunicipios() {
+//     try {
+//         // Cargar el archivo JSON
+//         const response = await fetch('/data/municipios.json');
+//         const data = await response.json(); // Parsear el JSON
+
+//         // Obtener el elemento select
+//         const selectElement = document.getElementById("municipio");
+
+//         // Agregar las opciones dinámicamente
+//         data.forEach(item => {
+//             const option = document.createElement("option");
+//             // Mostrar el municipio y departamento concatenados
+//             option.value = item.MUNICIPIO;
+//             option.textContent = `${item.MUNICIPIO}, ${item.DEPARTAMENTO}`;
+//             selectElement.appendChild(option);
+//         });
+//     } catch (error) {
+//         console.error("Error al cargar el archivo JSON: ", error);
+//     }
+// }
+
 async function cargarMunicipios() {
     try {
         // Cargar el archivo JSON
         const response = await fetch('/data/municipios.json');
-        const data = await response.json(); // Parsear el JSON
+        const data = await response.json();
 
         // Obtener el elemento select
         const selectElement = document.getElementById("municipio");
 
+        // Obtener el valor seleccionado previamente (del data-selected)
+        const selectedValue = selectElement.getAttribute('data-selected');
+
         // Agregar las opciones dinámicamente
         data.forEach(item => {
             const option = document.createElement("option");
-            // Mostrar el municipio y departamento concatenados
             option.value = item.MUNICIPIO;
             option.textContent = `${item.MUNICIPIO}, ${item.DEPARTAMENTO}`;
+
+            // Marcar como seleccionado si coincide con el valor guardado
+            if (item.MUNICIPIO === selectedValue) {
+                option.selected = true;
+
+            }
+
             selectElement.appendChild(option);
         });
     } catch (error) {
@@ -159,6 +226,9 @@ async function cargarTiposC() {
         const selectElement = document.getElementById("tipo_trabajador");
         const salarioInput = document.getElementById("salario"); // Asegúrate de que este sea el id de tu campo de salario
 
+        // Obtener el valor seleccionado previamente (del data-selected)
+        const selectedValue = selectElement.getAttribute('data-selected');
+
         const tiposConSalarioCero = [12, 19, 21, 42];
 
         // Agregar las opciones dinámicamente al select
@@ -166,6 +236,11 @@ async function cargarTiposC() {
             const option = document.createElement("option");
             option.value = item.id;
             option.textContent = item.description;
+
+            if (item.id.toString() === selectedValue) {
+                option.selected = true;
+            }
+
             selectElement.appendChild(option);
         });
 
@@ -188,12 +263,18 @@ async function cargarEPS() {
         // Obtener el elemento select
         const selectElement = document.getElementById("eps");
 
+        // Obtener el valor seleccionado previamente (del data-selected)
+        const selectedValue = selectElement.getAttribute('data-selected');
+
         // Agregar las opciones dinámicamente
         data.forEach(item => {
             const option = document.createElement("option");
             // Mostrar el municipio y departamento concatenados
             option.value = item.nombre;
             option.textContent = `${item.nombre}`;
+            if (item.nombre === selectedValue) {
+                option.selected = true;
+            }
             selectElement.appendChild(option);
         });
     } catch (error) {
@@ -210,12 +291,17 @@ async function cargarCajasComp() {
         // Obtener el elemento select
         const selectElement = document.getElementById("caja_compensacion");
 
+        const selectedValue = selectElement.getAttribute('data-selected');
+
         // Agregar las opciones dinámicamente
         data.forEach(item => {
             const option = document.createElement("option");
             // Mostrar el municipio y departamento concatenados
             option.value = item.nombre;
             option.textContent = `${item.nombre}`;
+            if (item.nombre === selectedValue) {
+                option.selected = true;
+            }
             selectElement.appendChild(option);
         });
     } catch (error) {
@@ -232,12 +318,17 @@ async function cargarPens() {
         // Obtener el elemento select
         const selectElement = document.getElementById("fondo_pensiones");
 
+        const selectedValue = selectElement.getAttribute('data-selected');
+
         // Agregar las opciones dinámicamente
         data.forEach(item => {
             const option = document.createElement("option");
             // Mostrar el municipio y departamento concatenados
             option.value = item.nombre;
             option.textContent = `${item.nombre}`;
+            if (item.nombre === selectedValue) {
+                option.selected = true;
+            }
             selectElement.appendChild(option);
         });
     } catch (error) {
@@ -254,12 +345,17 @@ async function cargarCesantias() {
         // Obtener el elemento select
         const selectElement = document.getElementById("fondo_cesantias");
 
+        const selectedValue = selectElement.getAttribute('data-selected');
+
         // Agregar las opciones dinámicamente
         data.forEach(item => {
             const option = document.createElement("option");
             // Mostrar el municipio y departamento concatenados
             option.value = item.nombre;
             option.textContent = `${item.nombre}`;
+            if (item.nombre === selectedValue) {
+                option.selected = true;
+            }
             selectElement.appendChild(option);
         });
     } catch (error) {
@@ -294,9 +390,9 @@ document.addEventListener('DOMContentLoaded', function () {
             transferenciaInfo.style.display = 'none';
 
             // Vaciar los campos de transferencia bancaria
-            bancoSelect.value = null;
+            bancoSelect.value = '';
             numeroCuentaInput.value = '';
-            tipoCuentaSelect.value = null;
+            tipoCuentaSelect.value = '';
         } else if (paymentMethodSelect.value === 'transferencia_bancaria') {
             // Si es "transferencia_bancaria", mostrar los campos de transferencia bancaria
             transferenciaInfo.style.display = 'block';

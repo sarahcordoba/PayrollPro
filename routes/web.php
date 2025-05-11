@@ -39,7 +39,6 @@ Route::get('/edit/nominas/{id}', [NominaController::class, 'edit'])->name('nomin
 Route::get('/liquidar/nominas/{id}', [NominaController::class, 'liquidar'])->name('nominas.liquidar');
 
 
-
 Route::post('api/add/deducciones', [DeduccionController::class, 'store']);
 Route::post('api/add/deduccionesnomina', [DeduccionNominaController::class, 'store']);
 

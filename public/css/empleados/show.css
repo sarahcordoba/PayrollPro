@@ -1,14 +1,14 @@
 /* Variables de color en modo claro y oscuro */
 :root {
     /* Modo claro */
-    --color-bg-light: #f8f9fa;
+    /* --color-bg-light: #f8f9fa;
     --color-text-light: #333;
-    --color-primary-light: #ff7b9d;
+    --color-primary-light: #ff7b9d; */
 
     /* Modo oscuro */
-    --color-bg-dark: #333333;
+    /* --color-bg-dark: #333333;
     --color-text-dark: #ffffff;
-    --color-primary-dark: #ff7b9d;
+    --color-primary-dark: #ff7b9d; */
 }
 
 /* Estilos generales */

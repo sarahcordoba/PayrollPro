@@ -6,13 +6,13 @@
     --color-bg-light: #f9fafc;
     /* fondo normal */
     --color-bg-dark: #333;
-    --color-sb-light: #ffffff;
+    --color-sb-light: #64c6f719;
     /* fondo de la sidebar */
     --color-sb-dark: #2d2d2d;
     --color-text-light: #333;
     /* texto normal */
     --color-text-dark: #f9fafc;
-    --color-primary-light: #ff94ac;
+    --color-primary-light: #4484ebfc;
     /*ff7b9d*/
     --color-primary-dark: #ff7b9d;
     /* color cuando selecciono un step del form */
@@ -63,7 +63,7 @@
 }
 
 * {
-    font-family: "Host Grotesk", 'Times New Roman', Times, serif !important;
+    font-family: "DM Sans", 'Times New Roman', Times, serif !important;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
