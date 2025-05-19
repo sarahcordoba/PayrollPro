@@ -80,8 +80,15 @@
                         </div>
                         <div class="form-group">
                             <label class="requir" for="numero_identificacion">Número de identificación</label>
-                            <input type="text" id="numero_identificacion" name="numero_identificacion"
-                                class="form-control" required>
+                            <input 
+                                type="text" 
+                                id="numero_identificacion" 
+                                name="numero_identificacion" 
+                                class="form-control" 
+                                required
+                                maxlength="10"  <!-- Fuerza máximo 10 caracteres -->
+                            >
+                            <small id="error-identificacion" class="text-danger d-none"></small> <!-- Mensaje de error (oculto inicialmente) -->
                         </div>
                         {{-- </div> --}}
                     </div>
@@ -410,6 +417,29 @@
         </form>
 
     </div>
+
+<script>
+    document.getElementById('numero_identificacion').addEventListener('input', function() {
+        const input = this;
+        const errorContainer = document.getElementById('error-identificacion');
+        const value = input.value.trim();
+
+        // Validación: solo números y exactamente 10 dígitos
+        if (!/^\d+$/.test(value)) {
+            errorContainer.textContent = 'Solo se permiten números (0-9).';
+            errorContainer.classList.remove('d-none');
+            input.classList.add('is-invalid');
+        } else if (value.length !== 10) {
+            errorContainer.textContent = 'El número debe tener 10 dígitos.';
+            errorContainer.classList.remove('d-none');
+            input.classList.add('is-invalid');
+        } else {
+            errorContainer.textContent = '';
+            errorContainer.classList.add('d-none');
+            input.classList.remove('is-invalid');
+        }
+    });
+</script>
 
 @endsection
 <script type="text/javascript" src="{{ asset('js/forms/empleado-form.js') }}"></script>
