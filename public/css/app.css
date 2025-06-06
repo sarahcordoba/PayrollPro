@@ -250,3 +250,15 @@ body.dark-mode .mode-toggle {
     display: flex;
     justify-content: space-between;
 }
+
+*{
+.btn-style{
+    text-transform: uppercase !important;
+    letter-spacing: 1.2px !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 1rem !important;
+    padding: 0.5rem 1rem 0.5rem 1rem !important;
+    border-width: 1px !important;
+}
+}

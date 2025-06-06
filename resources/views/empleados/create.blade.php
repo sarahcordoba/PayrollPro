@@ -401,9 +401,9 @@
             </div>
 
             <div class="d-flex justify-content-between mt-3">
-                <button class="btn btn-secondary" id="prevButton" onclick="prevForm()">Atrás</button>
-                <button class="btn btn-primary" id="nextButton" onclick="nextForm()">Siguiente</button>
-                <button type="submit" class="btn btn-success" id="submitButton" style="display: none;">Guardar</button>
+                <button class="btn btn-secondary btn-style" id="prevButton" onclick="prevForm()">Atrás</button>
+                <button class="btn btn-primary btn-style" id="nextButton" onclick="nextForm()">Siguiente</button>
+                <button type="submit" class="btn btn-success btn-style" id="submitButton" style="display: none;">Guardar</button>
             </div>
 
             <p class="mt-3">Los campos marcados con * son obligatorios</p>

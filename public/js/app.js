@@ -22,17 +22,17 @@ function toggleMode() {
 }
 
 // aplicar el modo oscuro al cargar la página si está habilitado en localStorage
-window.addEventListener('DOMContentLoaded', () => {
-    const darkMode = localStorage.getItem('darkMode');
-    const button = document.getElementById("modeToggle");
+// window.addEventListener('DOMContentLoaded', () => {
+//     const darkMode = localStorage.getItem('darkMode');
+//     const button = document.getElementById("modeToggle");
 
-    if (darkMode === 'enabled') {
-        document.body.classList.add('dark-mode');
-        button.innerHTML = "☀️ Modo Claro";  // muestra modo claro
-    } else {
-        button.innerHTML = "🌙 Modo Oscuro";  // muestra modooscuro
-    }
-});
+//     if (darkMode === 'enabled') {
+//         document.body.classList.add('dark-mode');
+//         button.innerHTML = "☀️ Modo Claro";  // muestra modo claro
+//     } else {
+//         button.innerHTML = "🌙 Modo Oscuro";  // muestra modooscuro
+//     }
+// });
 
 // agregar el evento de clic al botón de modo oscuro
 // document.getElementById('modeToggle').addEventListener('click', toggleMode);

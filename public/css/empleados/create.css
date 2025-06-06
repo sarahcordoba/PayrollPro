@@ -1,7 +1,7 @@
 .container {
     max-width: 675px !important;
     margin: 0 auto;
-    padding: 20px !important;
+    padding: 50px 20px 20px 20px!important;
     /* background-color:var(--color-bg-light); */
     border-radius: 8px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
@@ -17,7 +17,7 @@
 }
 
 .titulito {
-    font-size: 2rem;
+    font-size: 2.25rem;
     margin-bottom: 20px;
     text-align: center;
 }

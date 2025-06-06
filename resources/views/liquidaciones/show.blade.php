@@ -50,8 +50,8 @@
         <div class="titlebutton">
             <p>Gestiona la información de tus empleados/as que vas a tener en cuenta para liquidar la nómina de este período.</p>
             <!-- Botón para abrir el modal con el id de liquidación en un atributo data -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#liquidacionModal" data-liquidacion-id="{{ $liquidacion->id }}">
-                Agregar empleado
+            <button type="button" class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#liquidacionModal" data-liquidacion-id="{{ $liquidacion->id }}">
+            + Agregar empleado
             </button>
         </div>
         <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">Filtar

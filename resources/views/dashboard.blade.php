@@ -203,14 +203,14 @@
     </style>
 
     <div class="container big">
-        <div class="header">
-            {{-- <h1>¡Buenas tardes, {{ $user->name }}!</h1> --}}
-            <p>Aquí puedes ver tus resúmenes y accesos rápidos.</p>
+        <div >
+            <h1>¡Buenas tardes, {{ $user->name ?? 'Sarah' }}!</h1>
+            {{-- <p>Aquí puedes ver tus resúmenes y accesos rápidos.</p> --}}
         </div>
 
         <div class="summary">
             <div>
-                <p>Última nómina creada</p>
+                <p>Última liquidación</p>
                 <h2>{{ $user->last_payroll ?? '0' }}</h2>
             </div>
             <div>
@@ -218,25 +218,15 @@
                 <h2>{{ $user->email ?? '0' }}</h2>
             </div>
             <div>
-                <p>Estado</p>
-                <span class="status">{{ $user->status ?? 'Pendiente' }}</span>
+                <p>Total Pago</p>
+                <span>{{ $user->status ?? '$100000000000' }}</span>
             </div>
             <div>
-                <p>Progreso de emisión</p>
-                <h2>{{ $user->emission_progress ?? '-' }}</h2>
-            </div>
-            <div>
-                <a href="#" class="button">Ir a emitir</a>
+                <a href="#" class="button btn-style">Ir a liquidar</a>
             </div>
         </div>
 
         <div class="cards">
-            <div class="card">
-                <h3>Emisiones de nómina</h3>
-                <p>{{ $user->payrolls_message ?? 'Aún no tienes nóminas emitidas.' }}</p>
-                <a href="#" class="button">+ Nueva emisión</a>
-            </div>
-
             <div class="card indicators">
                 <h3>Indicadores</h3>
                 <div class="indicator">
@@ -254,18 +244,17 @@
             </div>
 
             <div class="card events">
-                <h3>Eventos</h3>
-                <div class="event">
-                    <span>Emisión de Nómina</span>
-                    <span>Ir →</span>
+                <h3>Agrega nuevos empleados</h3>
+                <p>Crea tus empleados uno a uno.</p>
+                <div>
+                    <a href="#" class="button btn-style">Ir a empleados</a>
                 </div>
-                <p>No tienes más eventos próximos.</p>
             </div>
         </div>
 
-        <div class="card chart">
+        {{-- <div class="card chart">
             <h3>Contratación por mes</h3>
             <p>Gráfica (Placeholder)</p>
-        </div>
+        </div> --}}
     </div>
 @endsection

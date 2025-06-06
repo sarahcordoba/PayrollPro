@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/empleados/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/empleados/show.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/liquidaciones/index.css') }}">
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,14 +62,14 @@
                 @endforeach
             </ul>
             {{-- botón de modo oscuro --}}
-            <button id="modeToggle" class="mode-toggle" onclick="toggleMode()">🌙 Modo Oscuro</button>
+            {{-- <button id="modeToggle" class="mode-toggle" onclick="toggleMode()">🌙 Modo Oscuro</button> --}}
             <!-- Add a form that will submit the logout request -->
             <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
 
             <!-- Button to trigger the logout form -->
-            <button id="modeToggle" class="mode-toggle"
+            <button id="modeToggle" class="mode-toggle btn-style"
                 onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                 Salir
             </button>
