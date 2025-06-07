@@ -10,6 +10,7 @@ use App\Http\Controllers\ComisionController;
 use App\Http\Controllers\ComisionNominaController;
 use App\Http\Controllers\DeduccionNominaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncapacidadController;
 use App\Http\Controllers\LiquidacionController;
 use App\Models\Comision;
 use App\Models\ComisionNomina;
@@ -23,6 +24,8 @@ Route::resource('nominas', NominaController::class);
 Route::resource('deducciones', DeduccionController::class);
 Route::resource('bonificaciones', ComisionController::class);
 Route::resource('liquidaciones', LiquidacionController::class);
+Route::resource('incapacidades', IncapacidadController::class);
+
 //Route::resource('comisionnomina', ComisionNominaController::class);
 //Route::resource('deduccionnomina', DeduccionNominaController::class);
 //Route::get('/liquidaciones/{id}', [LiquidacionController::class, 'show'])->name('liquidaciones.show');
