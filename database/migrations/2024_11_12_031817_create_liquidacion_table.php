@@ -17,7 +17,9 @@ return new class extends Migration
             $table->date('fecha_inicio'); // Fecha de inicio del período de liquidación
             $table->date('fecha_fin'); // Fecha de fin del período de liquidación
             $table->string('estado', 15); // Estado de la liquidación, por ejemplo: "Pendiente", "Completado"
-        
+            
+            $table->integer('progreso'); // Estado de la liquidación, por ejemplo: "Pendiente", "Completado"
+
             $table->decimal('salario', 10, 2); // Salario base del empleado para el período
             $table->decimal('total_deducciones', 10, 2)->default(0); // Total de deducciones aplicadas
             $table->decimal('total_comisiones', 10, 2)->default(0); // Total de comisiones aplicadas

@@ -8,6 +8,7 @@ use App\Models\Deduccion;
 use App\Models\Comision;
 use App\Models\DeduccionNomina;
 use App\Models\ComisionNomina;
+use App\Models\Liquidacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -178,5 +179,33 @@ class NominaController extends Controller
         //return response()->json($nomina);
         return view('nominas.edit', compact('nomina', 'deduccionesAplicadas', 'comisionesAplicadas', 'deduccionesDisponibles', 'comisionesDisponibles'));
         // Retornar la vista de edición con la información de la nómina
+    }
+
+    public function liquidar(Request $request, $id)
+    {
+        $request->validate([
+            'paymentOption' => 'required|string|in:transferencia,efectivo,cheque',
+        ]);
+    
+        $nomina = Nomina::findOrFail($id);
+    
+        $nomina->estado = 'Liquidado';
+        $nomina->metodopago= $request->paymentOption; // asegúrate de tener esta columna en DB
+        $nomina->save();
+    
+        $liquidacion = Liquidacion::findOrFail($nomina->idLiquidacion);
+    
+        $total = Nomina::where('idLiquidacion', $liquidacion->id)->count();
+        $liquidadas = Nomina::where('idLiquidacion', $liquidacion->id)
+                            ->where('estado', 'Liquidado')
+                            ->count();
+    
+        $progreso = $total > 0 ? round(($liquidadas / $total) * 100, 2) : 0;
+    
+        $liquidacion->progreso = $progreso;
+        $liquidacion->save();
+    
+        return redirect()->route('nominas.show', $nomina->id)
+            ->with('success', 'Nómina liquidada correctamente con método de pago: ' . $request->paymentOption);
     }
 }

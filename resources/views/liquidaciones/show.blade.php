@@ -11,7 +11,7 @@
         <div class="col-md-6">
             <div class="card" style="height: 6rem">
                 <div class="card-body text-center">
-                    <p><strong> Progreso</strong> 10%</p>
+                    <p><strong> Progreso</strong> {{ $liquidacion->progreso }}%</p>
 
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <p>Gestiona la información de tus empleados/as que vas a tener en cuenta para liquidar la nómina de este período.</p>
             <!-- Botón para abrir el modal con el id de liquidación en un atributo data -->
             <button type="button" class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#liquidacionModal" data-liquidacion-id="{{ $liquidacion->id }}">
-            + Agregar empleado
+                + Agregar empleado
             </button>
         </div>
         <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">Filtar
@@ -80,7 +80,9 @@
                     <td>
                         <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary">Ver Detalles</a>
                         <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary">Editar</a>
+                        @if ($nomina->estado != 'Liquidado')
                         <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary">Liquidar</a>
+                        @endif
                         <form action="{{ route('nominas.destroy', $nomina->id) }}" method="POST">
                             @csrf
                             @method('DELETE')

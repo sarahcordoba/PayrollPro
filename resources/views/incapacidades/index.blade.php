@@ -32,20 +32,20 @@
                 <tbody id="empleados-tbody">
                     @foreach ($incapacidades as $incapacidad)
                     <tr>
-                        <td>{{ $incapacidad->primer_nombre }} {{ $incapacidad->segundo_nombre }}
-                            {{ $incapacidad->primer_apellido }} {{ $incapacidad->segundo_apellido }}
+                        <td>{{ $incapacidad->fecha_inicio }} - {{ $incapacidad->fecha_fin }}
                         </td>
-                        <td>{{ $empleado->cargo }}</td>
-                        <td>{{ $empleado->numero_identificacion }}</td>
-                        <td>{{ number_format($empleado->salario, 2) }}</td>
+                        <td> {{ $incapacidad->empleado->primer_nombre }} {{ $incapacidad->empleado->segundo_nombre }}
+                            {{ $incapacidad->empleado->primer_apellido }} {{ $incapacidad->empleado->segundo_apellido }}
+                        </td>
+                        <td>{{ $incapacidad->dias_incapacidad }}</td>
+                        <td>{{ $incapacidad->tipo_incapacidad }}</td>
+                        <td>{{ $incapacidad->estado }}</td>
+
                         <td>
-                            <a href="{{ route('empleados.show', $empleado->id) }}" class="btn btn-secondary btn-sm">
+                            <a href="{{ route('incapacidades.show', $incapacidad->id) }}" class="btn btn-secondary btn-sm">
                                 <i class="bi bi-eye"></i>
                             </a>
-                            <a href="{{ route('empleados.edit', $empleado->id) }}" class="btn btn-primary btn-sm">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                            <form action="{{ route('empleados.destroy', $empleado->id) }}" method="POST"
+                            <form action="{{ route('incapacidades.destroy', $incapacidad->id) }}" method="POST"
                                 style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')

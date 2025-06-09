@@ -26,4 +26,9 @@ class Incapacidad extends Model
         'id_rrhh',
         'observaciones_rrhh'
     ];
+
+    public function empleado()
+    {
+        return $this->belongsTo(Empleado::class, 'id_empleado');
+    }
 }

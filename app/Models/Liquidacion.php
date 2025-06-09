@@ -18,6 +18,7 @@ class Liquidacion extends Model
         'fecha_inicio',
         'fecha_fin',
         'estado',
+        'progreso',
         'salario',
         'total_deducciones',
         'total_comisiones',

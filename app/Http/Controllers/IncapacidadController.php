@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Incapacidad;
 use Illuminate\Http\Request;
+use \Illuminate\Support\Facades\Auth;
 
 class IncapacidadController extends Controller
 {
@@ -19,7 +20,7 @@ class IncapacidadController extends Controller
     public function show($id)
     {
         $incapacidad = Incapacidad::findOrFail($id);
-        return response()->json($incapacidad);
+        return view('incapacidades.show', compact('incapacidad'));
     }
 
     // POST /incapacidades
@@ -73,6 +74,20 @@ class IncapacidadController extends Controller
 
         $incapacidad->update($validated);
         return response()->json($incapacidad);
+    }
+
+    public function review(Request $request, $id)
+    {
+        $incapacidad = Incapacidad::findOrFail($id);
+
+        $incapacidad->estado = $request->estado;
+        $incapacidad->observaciones_rrhh = $request->observaciones_rrhh;
+        $incapacidad->fecha_revision = now();
+        $incapacidad->id_rrhh = Auth::id();
+
+        $incapacidad->save();
+
+        return redirect()->route('incapacidades.index')->with('success', 'Incapacidad actualizada correctamente');
     }
 
     // DELETE /incapacidades/{id}
