@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lq')
+@section('title', 'Colilla de Pago')
 
 @section('content')
 <div class="container">
@@ -139,9 +139,9 @@
     </div>
     <div style="display:flex; justify-content: space-between;">
 
-        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary btn-style">Cancelar</a>
         <div style="display:flex;  gap: .5rem;">
-            <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-primary">Editar</a>
+            <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-primary btn-style">Editar</a>
 
             @if ($nomina->estado != 'Liquidado')
             <!-- Trigger Button -->

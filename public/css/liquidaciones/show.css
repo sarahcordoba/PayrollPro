@@ -1,0 +1,129 @@
+/* .btn-style {
+    background-color: #3c6ff7;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+
+.btn-style:hover {
+    background-color: #325de0;
+}
+
+td .btn {
+    margin-bottom: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+.btn-secondary {
+    background-color: #e0e7ff;
+    color: #3c6ff7;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #d6ddfc;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+
+.card-body.text-center::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+    border: 5px solid #c3dafe;
+    border-top: 5px solid #3c6ff7;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+} */
+
+.container-liquidaciones {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 50px 20px 20px 20px;
+}
+
+
+.container-empleados-liquidaciones {
+    width: auto;
+    margin: 0 auto;
+}
+
+.container-container {
+    display: flex;
+    gap: 20px;
+}
+
+.container-left,
+.container-right {
+    flex: 1;
+}
+
+.container-empleados-liquidaciones {
+    .titlebutton {
+        p {
+            text-align: left;
+        }
+
+        /* bottom{
+            width: 154px;
+        } */
+
+        .text-empleads {
+            flex: 1;
+        }
+    }
+}
+
+
+.card.sb-light {
+    background-color: var(--color-sb-light);
+    border: none;
+    border-radius: 12px;
+}
+
+.card.sb-light.r {
+    display: flex;
+    justify-content: center;
+}
+
+.sb-light .list-group-item {
+    background-color: transparent;
+    /* border: none; */
+}
+
+.sb-light .list-group-horizontal .list-group-item {
+    border: none;
+    text-align: center;
+}
+
+.list-group-horizontal{
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem;
+}
+
+.card.shadow-soft {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* sombra suave */
+    border: none;
+    border-radius: 12px;
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.4rem;
+}

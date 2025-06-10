@@ -179,6 +179,28 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        .eventos {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .eventos .button {
+            margin: 0;
+        }
+
+
+        .arriba {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .abajo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
         .dark-mode .indicator,
         .dark-mode .event {
             background-color: var(--color-step-dark);
@@ -203,7 +225,7 @@
     </style>
 
     <div class="container big">
-        <div >
+        <div>
             <h1>¡Buenas tardes, {{ $user->name ?? 'Sarah' }}!</h1>
             {{-- <p>Aquí puedes ver tus resúmenes y accesos rápidos.</p> --}}
         </div>
@@ -211,18 +233,18 @@
         <div class="summary">
             <div>
                 <p>Última liquidación</p>
-                <h2>{{ $user->last_payroll ?? '0' }}</h2>
+                <h5>{{ $user->last_payroll ?? '0' }}</h5>
             </div>
             <div>
                 <p>No. empleados</p>
-                <h2>{{ $user->email ?? '0' }}</h2>
+                <h5>{{ $user->email ?? '0' }}</h5>
             </div>
             <div>
                 <p>Total Pago</p>
-                <span>{{ $user->status ?? '$100000000000' }}</span>
+                <h5>{{ $user->status ?? '$100000000000' }}</h5>
             </div>
             <div>
-                <a href="#" class="button btn-style">Ir a liquidar</a>
+                <a href="{{ route('liquidaciones.index') }}" class="button btn-style">Ir a liquidar</a>
             </div>
         </div>
 
@@ -231,23 +253,25 @@
                 <h3>Indicadores</h3>
                 <div class="indicator">
                     <span>Auxilio de transporte</span>
-                    <span>$162.000 COP</span>
+                    <span>$200.000 COP</span>
                 </div>
                 <div class="indicator">
                     <span>Salario mínimo</span>
-                    <span>$1.300.000 COP</span>
+                    <span>$1.423.500 COP</span>
                 </div>
                 <div class="indicator">
                     <span>Salario integral</span>
-                    <span>$16.900.000 COP</span>
+                    <span>$18.505.500 COP</span>
                 </div>
             </div>
 
-            <div class="card events">
-                <h3>Agrega nuevos empleados</h3>
-                <p>Crea tus empleados uno a uno.</p>
-                <div>
-                    <a href="#" class="button btn-style">Ir a empleados</a>
+            <div class="card eventos">
+                <div class="arriba">
+                    <h3>Agrega nuevos empleados</h3>
+                    <p>Crea tus empleados uno a uno.</p>
+                </div>
+                <div class="abajo">
+                    <a href="{{ route('empleados.index') }}" class="button btn-style">Ir a empleados</a>
                 </div>
             </div>
         </div>

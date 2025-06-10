@@ -567,11 +567,6 @@
                 </div>
             </div>
 
-            <!-- Acciones del formulario -->
-            {{-- <div class="form-actions">
-                <button type="button" class="btn btn-outline-primary" onclick="showPreviousSection()">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="showNextSection()">Siguiente</button>
-            </div> --}}
             <div class="d-flex justify-content-between mt-3">
                 <button class="btn btn-secondary" id="prevButton" onclick="prevForm()">Atrás</button>
                 <button class="btn btn-primary" id="nextButton" onclick="nextForm()">Siguiente</button>

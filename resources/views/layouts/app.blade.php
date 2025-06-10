@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="{{ asset('css/empleados/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/empleados/show.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/liquidaciones/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/liquidaciones/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/liquidaciones/show.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -70,8 +70,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="crearPeriodo()">Crear Periodo</button>
+        <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary btn-style" onclick="crearPeriodo()">Crear Periodo</button>
       </div>
     </div>
   </div>

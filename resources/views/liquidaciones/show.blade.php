@@ -1,32 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'Lq')
+@section('title', 'Detalles Liquidación')
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="container-liquidaciones">
     <h1>Detalles de la Liquidación</h1>
-    <div class="rowa mt-4" style="display:flex;">
-        <div class="col-md-6">
-            <div class="card" style="height: 6rem">
+    
+    <div class="container-container">
+        <div class="container-left">
+            <div class="card sb-light shadow " style="height: 6rem">
                 <div class="card-body text-center">
                     <p><strong> Progreso</strong> {{ $liquidacion->progreso }}%</p>
 
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card" style="height: 6rem">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Periodo de liquidacion</strong> {{ $liquidacion->fecha_inicio }} - {{ $liquidacion->fecha_fin }}</li>
+        <div class="container-right">
+            <div class="card sb-light shadow r" style="height: 6rem">
+                <ul class="list-group list-group-flush sb-light">
+                    <li class="list-group-item"><strong>Periodo de liquidacion:</strong> {{ $liquidacion->fecha_inicio }} - {{ $liquidacion->fecha_fin }}</li>
                     <li class="list-group-item"><strong>Estado:</strong> {{ $liquidacion->estado }}</li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="card" style="width: 100%;">
-        <ul class="list-group list-group-horizontal list-group-flush">
+
+
+    <div class="card sb-light shadow" style="width: 100%;">
+        <ul class="list-group list-group-horizontal list-group-flush sb-light">
             <li class="list-group-item d-flex flex-column">
                 <strong>Empleados</strong>
                 <span>{{ count($nominas)}}</span>
@@ -45,17 +48,18 @@
             </li>
         </ul>
     </div>
-    <div class="container-liquidaciones">
+    <div class="container-empleados-liquidaciones">
         <h1 class="titulito">Empleados</h1>
         <div class="titlebutton">
+            <div class="text-empleads">
             <p>Gestiona la información de tus empleados/as que vas a tener en cuenta para liquidar la nómina de este período.</p>
-            <!-- Botón para abrir el modal con el id de liquidación en un atributo data -->
+            </div>
+            <div class="boton-empleads">
             <button type="button" class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#liquidacionModal" data-liquidacion-id="{{ $liquidacion->id }}">
                 + Agregar empleado
             </button>
+            </div>
         </div>
-        <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">Filtar
-        </button>
         <table class="table table table-hover table-bordered table-responsive">
             <thead>
                 <tr>
@@ -86,8 +90,9 @@
                         <form action="{{ route('nominas.destroy', $nomina->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger btn-style"><i class="bi bi-trash"></i></button>
                         </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -129,8 +134,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="crearNominas()">Crear</button>
+                    <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-style" onclick="crearNominas()">Crear</button>
                 </div>
             </div>
         </div>

@@ -8,18 +8,15 @@
             <div class="details">
                 <div class="name">{{ $empleado->primer_nombre }} {{ $empleado->segundo_nombre }}
                     {{ $empleado->primer_apellido }} {{ $empleado->segundo_apellido }}</div>
-                <div class="salary">Salario: $ {{ number_format($empleado->salario_neto, 2) }}</div>
+                <div class="salary">Salario: ${{ number_format($empleado->salario, 2) }}</div>
             </div>
             <div class="actions">
-                <button class="dots">⋮</button>
-                <button class="edit-button">✏️ Editar</button>
-                <button class="new-button">+ Nueva novedad</button>
+                <button class="edit-button btn-style">✏️ Editar</button>
             </div>
         </div>
 
         <div class="tabs">
             <div class="tab active">Información general</div>
-            <div class="tab">Conceptos recurrentes</div>
         </div>
 
         <div class="content-card">
@@ -34,10 +31,6 @@
             <div class="info-card">
                 <div class="title">Cargo</div>
                 <div class="value">{{ $empleado->cargo }}</div>
-            </div>
-            <div class="info-card">
-                <div class="title">Salario neto</div>
-                <div class="value">$ {{ number_format($empleado->salario_neto, 2) }}</div>
             </div>
             <div class="info-card">
                 <div class="title">Días de vacaciones</div>
@@ -252,6 +245,6 @@
             </div>
         </div>
 
-        <a href="{{ route('empleados.index') }}" class="btn btn-secondary mt-3">Volver a la lista</a>
+        <a href="{{ route('empleados.index') }}" class="btn btn-secondary btn-style">Volver a la lista</a>
     </div>
 @endsection

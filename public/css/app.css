@@ -229,9 +229,9 @@ body.dark-mode .mode-toggle {
     text-align: center;
 }
 
-.container-liquidaciones{
+/* .container-liquidaciones{
     width: 56.25rem !important;
-}
+} */
 
 .card-liquidaciones{
     width: 56.25rem;
@@ -262,3 +262,14 @@ body.dark-mode .mode-toggle {
     border-width: 1px !important;
 }
 }
+
+
+.td-acciones{
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+

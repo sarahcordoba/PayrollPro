@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Permitir solo números y hasta 15 caracteres para el número de identificación
     idNumberInput.addEventListener('input', () => {
-        idNumberInput.value = idNumberInput.value.replace(/[^0-9]/g, '').slice(0, 15);
+        idNumberInput.value = idNumberInput.value.replace(/[^0-9]/g, '').slice(0, 10);
     });
 
     // Permitir solo números y hasta 15 caracteres para el teléfono

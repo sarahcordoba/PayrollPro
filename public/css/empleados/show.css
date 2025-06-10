@@ -1,17 +1,4 @@
-/* Variables de color en modo claro y oscuro */
-:root {
-    /* Modo claro */
-    /* --color-bg-light: #f8f9fa;
-    --color-text-light: #333;
-    --color-primary-light: #ff7b9d; */
 
-    /* Modo oscuro */
-    /* --color-bg-dark: #333333;
-    --color-text-dark: #ffffff;
-    --color-primary-dark: #ff7b9d; */
-}
-
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     margin: 0;

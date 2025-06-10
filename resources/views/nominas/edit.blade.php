@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lq')
+@section('title', 'Editar Liquidación')
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -186,9 +186,9 @@
         </div>
     </div>
     <div style="display:flex; justify-content: space-between;">
-        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary btn-style">Cancelar</a>
         <div style="display:flex; gap: .5rem;">
-            <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-primary">Guardar</a>
+            <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-primary btn-style">Guardar</a>
         </div>
     </div>
 </div>
