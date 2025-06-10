@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('role', ['admin', 'rrhh', 'employee'])->default('employee')->after('email');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('nit')->unique(); // Agregado: Campo NIT único
             $table->string('nombre_empresa'); // Agregado: Campo Nombre de la empresa
+            // $table->string('role')->default('user')->after('email'); // Or use an enum: $table->enum('role', ['admin', 'editor', 'user'])->default('user')->after('email');
             $table->rememberToken();
             $table->timestamps();
         });

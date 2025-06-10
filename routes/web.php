@@ -1,5 +1,7 @@
     <?php
 
+    use Illuminate\Support\Facades\Log;
+    use Illuminate\Support\Facades\Auth; // Asegúrate de importar el facade Auth
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\{
         ProfileController,
@@ -14,12 +16,39 @@
         DeduccionNominaController,
         PagoController
     };
+use App\Models\Liquidacion;
 
-    // Redirección raíz al dashboard
-    Route::get('/', fn() => redirect()->route('dashboard'))->name('home');
+    // Redirección raíz condicional según el rol del usuario
+    Route::get('/', function () {
 
-    // Vista del dashboard
-    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
+        /** @var \App\Models\User $user */ // <-- This PHPDoc hint is for Intelephense
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        if ($user->hasRole('admin') || $user->hasRole('rrhh')) {
+            return redirect()->route('dashboard');
+        }
+
+        if ($user->hasRole('employee')) {
+            return redirect('/profile');
+        }
+
+        // Si el usuario no tiene roles válidos, abortar con 403
+        abort(403, 'No tienes permisos para acceder.');
+    })->middleware('auth')->name('home');
+
+    // Vista del dashboard (solo admin y rrhh)
+    Route::get('/dashboard', function () {
+        $user = Auth::user();
+        $lastLiquid = Liquidacion::where('progreso', 100)
+        ->orderBy('fecha_inicio', 'desc')
+        ->first();
+        return view('dashboard', compact('user', 'lastLiquid'));
+    })->middleware(['auth', 'role:admin,rrhh'])->name('dashboard');
+
 
     // Autenticación y perfil
     Route::middleware('auth')->group(function () {
@@ -28,17 +57,20 @@
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-    // Recursos principales (RESTful)
-    Route::resources([
-        'departamentos' => DepartamentoController::class,
-        'empleados'     => EmpleadoController::class,
-        'nominas'       => NominaController::class,
-        'deducciones'   => DeduccionController::class,
-        'bonificaciones' => ComisionController::class,
-        'liquidaciones' => LiquidacionController::class,
-        'incapacidades' => IncapacidadController::class,
-        'pagos' => PagoController::class,
-    ]);
+    // Recursos principales (RESTful) ['admin', 'rrhh', 'employee']
+    Route::middleware(['auth', 'role:admin,rrhh'])->group(function () {
+        Route::resources([
+            'departamentos'  => DepartamentoController::class,
+            'empleados'      => EmpleadoController::class,
+            'nominas'        => NominaController::class,
+            'deducciones'    => DeduccionController::class,
+            'bonificaciones' => ComisionController::class,
+            'liquidaciones'  => LiquidacionController::class,
+            'incapacidades'  => IncapacidadController::class,
+            'pagos'          => PagoController::class,
+        ]);
+    });
+
 
     // Rutas personalizadas (acciones específicas)
     Route::get('/edit/nominas/{id}', [NominaController::class, 'edit'])->name('nominas.edit');
