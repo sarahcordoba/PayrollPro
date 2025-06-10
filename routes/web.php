@@ -11,7 +11,8 @@
         LiquidacionController,
         IncapacidadController,
         ComisionNominaController,
-        DeduccionNominaController
+        DeduccionNominaController,
+        PagoController
     };
 
     // Redirección raíz al dashboard
@@ -36,16 +37,29 @@
         'bonificaciones' => ComisionController::class,
         'liquidaciones' => LiquidacionController::class,
         'incapacidades' => IncapacidadController::class,
+        'pagos' => PagoController::class,
     ]);
 
     // Rutas personalizadas (acciones específicas)
-    Route::put('/nominas/{id}/liquidar', [NominaController::class, 'liquidar'])->name('nominas.liquidar');
-    Route::put('/incapacidades/{id}/review', [IncapacidadController::class, 'review'])->name('incapacidades.review');
     Route::get('/edit/nominas/{id}', [NominaController::class, 'edit'])->name('nominas.edit');
+    Route::get('/liquidar/nominas/{id}', [NominaController::class, 'liquidar'])->name('nominas.liquidar');
 
+
+    Route::post('api/add/deducciones', [DeduccionController::class, 'store']);
+    Route::post('api/add/deduccionesnomina', [DeduccionNominaController::class, 'store']);
+
+    Route::post('api/add/comisiones', [ComisionController::class, 'store']);
+    Route::post('api/add/comisionesnomina', [ComisionNominaController::class, 'store']);
+
+    Route::delete('api/delete/liquidacion/{id}', [LiquidacionController::class, 'destroy']);
     Route::delete('api/delete/deduccionnomina/{nomina_id}/{deduccion_id}', [DeduccionNominaController::class, 'destroy'])->name('deduccionnomina.delete');
     Route::delete('api/delete/comisionnomina/{nomina_id}/{comision_id}', [ComisionNominaController::class, 'destroy'])->name('comisionnomina.delete');
     Route::put('api/update/comisionnomina/{nomina_id}/{comision_id}', [ComisionNominaController::class, 'update'])->name('comisionnomina.update');
     Route::put('api/update/deduccionnomina/{nomina_id}/{deduccion_id}', [DeduccionNominaController::class, 'update'])->name('comisionnomina.update');
+
+
+    Route::post('api/add/liquidacion', [LiquidacionController::class, 'store']);
+    Route::get('api/getall/liquidaciones', [LiquidacionController::class, 'getLiquidaciones']);
+    Route::post('api/add/nomina', [NominaController::class, 'store']);
 
     require __DIR__ . '/auth.php';

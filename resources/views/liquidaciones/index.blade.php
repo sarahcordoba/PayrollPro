@@ -202,8 +202,9 @@
             const liquidacionData = {
                 fecha_inicio: fecha_inicio,
                 fecha_fin: fecha_fin,
-                estado: "por liquidar",
+                estado: "Por liquidar",
                 salario: 0,
+                progreso: 0,
                 total_deducciones: 0,
                 total_comisiones: 0,
                 total: 0

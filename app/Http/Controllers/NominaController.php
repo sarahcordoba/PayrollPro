@@ -9,6 +9,7 @@ use App\Models\Comision;
 use App\Models\DeduccionNomina;
 use App\Models\ComisionNomina;
 use App\Models\Liquidacion;
+use App\Models\Pago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -140,7 +141,7 @@ class NominaController extends Controller
                     'monto' => $deduccionData['monto']
                 ]);
             }
-            
+
             DB::select("UpdateLiquidacionTotals('$nomina->idLiquidacion')");
             return response()->json($nomina, 201);
         } catch (\Exception $e) {
@@ -184,28 +185,40 @@ class NominaController extends Controller
     public function liquidar(Request $request, $id)
     {
         $request->validate([
-            'paymentOption' => 'required|string|in:transferencia,efectivo,cheque',
+            'paymentOption' => 'required|string|in:transferencia_bancaria,pago_efectivo",cheque_bancario,pago_especie',
         ]);
-    
+
         $nomina = Nomina::findOrFail($id);
-    
+
         $nomina->estado = 'Liquidado';
-        $nomina->metodopago= $request->paymentOption; // asegúrate de tener esta columna en DB
+        $nomina->metodopago = $request->paymentOption;
         $nomina->save();
-    
+
         $liquidacion = Liquidacion::findOrFail($nomina->idLiquidacion);
-    
+
         $total = Nomina::where('idLiquidacion', $liquidacion->id)->count();
         $liquidadas = Nomina::where('idLiquidacion', $liquidacion->id)
-                            ->where('estado', 'Liquidado')
-                            ->count();
-    
+            ->where('estado', 'Liquidado')
+            ->count();
+
         $progreso = $total > 0 ? round(($liquidadas / $total) * 100, 2) : 0;
-    
         $liquidacion->progreso = $progreso;
         $liquidacion->save();
-    
+
+        // Crear el pago automáticamente
+        $pago = Pago::create(attributes: [
+            'empleado_id'        => $nomina->empleado_id,
+            'nomina_id'          => $nomina->id,
+            'total_devengado'    => $nomina->salario_base + $nomina->total_comisiones,
+            'total_deducciones'  => $nomina->total_deducciones,
+            'total_pagado'       => $nomina->total,
+            'fecha_pago'         => now()->toDateString(),
+            'estado_pago'        => 'Completado',
+        ]);
+
+        $pago->save();
+
         return redirect()->route('nominas.show', $nomina->id)
-            ->with('success', 'Nómina liquidada correctamente con método de pago: ' . $request->paymentOption);
+            ->with('success', 'Nómina liquidada y pago registrado automáticamente.');
     }
 }
