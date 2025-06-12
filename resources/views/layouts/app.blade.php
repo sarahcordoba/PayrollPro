@@ -56,11 +56,11 @@
             {{-- lista de vainos --}}
             <ul class="nav-list">
                 @foreach ($menuItems as $item)
-                    <li>
-                        <a href="{{ $item['url'] }}">
-                            <i class="{{ $item['icon'] }}"></i> {{ $item['name'] }}
-                        </a>
-                    </li>
+                <li>
+                    <a href="{{ $item['url'] }}">
+                        <i class="{{ $item['icon'] }}"></i> {{ $item['name'] }}
+                    </a>
+                </li>
                 @endforeach
             </ul>
             {{-- botón de modo oscuro --}}
@@ -71,6 +71,12 @@
             </form>
 
             <!-- Button to trigger the logout form -->
+            <button id="modeToggle" class="mode-toggle btn-style"
+                onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                Salir
+            </button>
+
+            <!-- Button to show user profile -->
             <button id="modeToggle" class="mode-toggle btn-style"
                 onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                 Salir
