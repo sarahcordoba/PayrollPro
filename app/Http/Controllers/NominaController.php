@@ -142,7 +142,7 @@ class NominaController extends Controller
                 ]);
             }
 
-            DB::select("UpdateLiquidacionTotals('$nomina->idLiquidacion')");
+            DB::statement("CALL UpdateLiquidacionTotals($nomina->idLiquidacion)");
             return response()->json($nomina, 201);
         } catch (\Exception $e) {
             // Registrar el error y retornar una respuesta JSON

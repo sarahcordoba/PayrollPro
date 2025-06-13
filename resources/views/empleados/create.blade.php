@@ -83,6 +83,14 @@
                             <input type="text" id="numero_identificacion" name="numero_identificacion"
                                 class="form-control" required>
                         </div>
+                        <div class="form-group"> <label class="requir" for="role">Rol
+                            </label> <select id="role" name="role" class="form-control"
+                                required>
+                                <option value="admin">Administrador General</option>
+                                <option value="rrhh">Administrador de Recursos Humanos</option>
+                                <option value="employee">Empleado</option>
+                            </select>
+                        </div>
                         {{-- </div> --}}
                     </div>
                 </div>
