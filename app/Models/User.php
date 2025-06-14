@@ -22,10 +22,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'role',
+        'employeeId',
         'email',
         'password',
-        'nit',
-        'nombre_empresa'
+        'first_time'
     ];
 
     /**
@@ -56,7 +56,7 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
-     /**
+    /**
      * Check if the user has a given role.
      *
      * @param string $role
@@ -76,5 +76,11 @@ class User extends Authenticatable
     public function hasAnyRole(array $roles): bool
     {
         return in_array($this->role, $roles);
+    }
+
+    // Relación con el modelo Empleado
+    public function empleado()
+    {
+        return $this->belongsTo(Empleado::class, 'employeeId');
     }
 }

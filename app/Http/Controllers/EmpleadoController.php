@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth; // Asegúrate de importar el facade Auth
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 class EmpleadoController extends Controller
@@ -15,11 +18,7 @@ class EmpleadoController extends Controller
     // Mostrar todos los empleados
     public function index()
     {
-        // Fetch the authenticated user's ID
-        $idEmpleador = Auth::id();
-
-        // Get all empleados where idEmpleador matches the logged user's ID
-        $empleados = Empleado::where('idEmpleador', $idEmpleador)->get();
+        $empleados = Empleado::all();
         $totalEmpleados = $empleados->count();
 
         return view('empleados.index', compact('empleados', 'totalEmpleados'));
@@ -31,11 +30,11 @@ class EmpleadoController extends Controller
         return view('empleados.create');
     }
 
+    
     public function store(Request $request)
     {
         Log::info('Request Data: ', $request->all());
-
-        // Validate the data
+    
         $validatedData = $request->validate([
             'primer_nombre' => 'required|string|max:255',
             'segundo_nombre' => 'nullable|string|max:255',
@@ -71,21 +70,37 @@ class EmpleadoController extends Controller
             'fondo_pensiones' => 'required|string',
             'fondo_cesantias' => 'required|string',
         ], [
-            'correo.unique' => 'El correo electrónico ya está registrado. Por favor, ingrese otro.',
-            'numero_identificacion' => 'Ya existe un empleado con el número de identificación ingresado.'
+            'correo.unique' => 'El correo electrónico ya está registrado.',
+            'numero_identificacion.unique' => 'Ya existe un empleado con ese número de identificación.'
         ]);
-
-        // Add the idEmpleador from the authenticated user
-        $validatedData['idEmpleador'] = Auth::id();  // Assign the idEmpleador
-        Log::info('Data: ', $validatedData);
-
-        // Create the new employee with the validated data
-        Empleado::create($validatedData);
-
-        // Redirect to the employee list page with a success message
-        return redirect()->route('empleados.index') // Change to the desired route
-            ->with('success', 'Empleado creado correctamente');
+    
+        try {
+            DB::transaction(function () use ($validatedData, $request) {
+                // Crear el empleado
+                $empleado = Empleado::create($validatedData);
+    
+                // Crear el usuario asociado
+                User::create([
+                    'name' => $empleado->primer_nombre . ' ' . $empleado->primer_apellido,
+                    'employeeId' => $empleado->id,
+                    'email' => $empleado->correo,
+                    'role' => $request->input('role', 'employee'),
+                    'password' => Hash::make($empleado->numero_identificacion),
+                ]);
+            });
+    
+            return redirect()->route('empleados.index')
+                ->with('success', 'Empleado y usuario creados correctamente');
+    
+        } catch (\Exception $e) {
+            Log::error('Error al crear empleado y usuario: ' . $e->getMessage());
+    
+            return back()->withInput()
+                ->withErrors(['error' => 'Hubo un problema al crear el empleado o el usuario. Intente nuevamente.']);
+        }
     }
+    
+    
 
     // Mostrar un empleado específico
     public function show($id)

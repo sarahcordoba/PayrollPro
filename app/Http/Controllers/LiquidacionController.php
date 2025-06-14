@@ -61,7 +61,7 @@ class LiquidacionController extends Controller
     {
         $liquidacion = Liquidacion::findOrFail($id);
         $nominas = Nomina::where('idLiquidacion', $id)->get(); // Obtiene las nóminas relacionadas con esta liquidación
-        $empleados = Empleado::where('idEmpleador', Auth::id())->get(); // Filtra empleados asociados al usuario logueado
+        $empleados = Empleado::all(); // Filtra empleados asociados al usuario logueado
         return view('liquidaciones.show', compact('liquidacion', 'nominas', 'empleados'));
     }
 

@@ -10,8 +10,6 @@ class CreateEmpleadosTable extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idEmpleador'); //numero de identificación
-            $table->foreign('idEmpleador')->references('id')->on('users')->onDelete('cascade');
             $table->string('primer_nombre', 50);
             $table->string('segundo_nombre', 50)->nullable();
             $table->string('primer_apellido', 50);
