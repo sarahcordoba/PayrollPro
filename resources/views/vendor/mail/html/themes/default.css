@@ -168,7 +168,7 @@ img {
     padding: 0;
     text-align: center;
     width: 570px;
-    background-color: #64c6f719;
+    /* background-color: #64c6f719; */
 }
 
 .footer p {
@@ -273,7 +273,7 @@ img {
 
 .panel-content {
     /* background-color: #edf2f7; */
-    background-color: #64c6f719;
+    /* background-color: #64c6f719; */
     color: #718096;
     padding: 16px;
 }
