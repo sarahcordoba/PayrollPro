@@ -145,7 +145,7 @@
 
             @if ($nomina->estado != 'Liquidado')
             <!-- Trigger Button -->
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
+            <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
                 Liquidar
             </button>
             @endif
@@ -176,8 +176,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Confirmar Liquidación</button>
+                    <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary btn-style">Confirmar Liquidación</button>
                 </div>
             </div>
         </form>

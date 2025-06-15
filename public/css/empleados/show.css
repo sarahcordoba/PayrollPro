@@ -1,55 +1,22 @@
+.container-show-empleados {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 50px 20px 20px 20px;
+}
 
 body {
-    font-family: Arial, sans-serif;
+
+
     margin: 0;
     padding: 0;
     background-color: var(--color-bg-light);
     color: var(--color-text-light);
 }
 
-/* Aplicar modo oscuro */
-body.dark-mode {
-    background-color: var(--color-bg-dark);
-    color: var(--color-text-dark);
-}
-
-/* Contenedor de empleados */
-.container-show-empleados {
-    width: 1000px !important;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.dark-mode .header .details .name {
-    color: var(--color-text-dark);
-
-}
-.dark-mode .papa{
-    color: var(--color-text-dark);
-}
-
-body.dark-mode .information-card h5{
-
-  color: var(--color-primary-dark) !important;
-}
-
-.dark-mode .container-show-empleados {
-    width: 1000px !important;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: var(--color-bg-dark);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.name{
+.name {
     color: #e0e0e0;
 }
 
-/* Cabecera */
 .header {
     display: flex;
     justify-content: space-between;
@@ -64,7 +31,7 @@ body.dark-mode .information-card h5{
 
 .header .details .name {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     color: var(--color-text-light);
 }
 
@@ -102,15 +69,10 @@ body.dark-mode .information-card h5{
     color: #ffffff;
 }
 
-.dark-mode .new-button {
-    background-color: var(--color-primary-dark);
-}
-
 .new-button:hover {
     background-color: var(--color-primary-dark);
 }
 
-/* Pestañas */
 .tabs {
     display: flex;
     border-bottom: 2px solid #e0e0e0;
@@ -119,10 +81,10 @@ body.dark-mode .information-card h5{
 
 .tab {
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     color: #666;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .tab.active {
@@ -130,55 +92,15 @@ body.dark-mode .information-card h5{
     border-bottom: 2px solid var(--color-primary-light);
 }
 
-/* Tarjetas de Información */
 .information-card {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.information-card h5 {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--color-primary-light);
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.information-card h5::before {
-    font-size: 12px;
-}
-
-.information-card p {
-    font-size: 14px;
-    color: #666;
-    margin: 5px 0;
-    text-align: left;
-}
-
-.information-card strong {
-    color: #333;
-}
-
-/* Tarjetas Info en modo oscuro */
-body.dark-mode .information-card {
-    background-color: var(--color-bg-dark);
-    border: 1px solid #444;
-}
-
-body.dark-mode .information-card h5,
-body.dark-mode .information-card p,
-body.dark-mode .info-card .title,
-body.dark-mode .info-card .value {
-    color: var(--color-text-dark);
-}
-
-/* Espaciado general */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -190,7 +112,6 @@ body.dark-mode .info-card .value {
     min-width: 300px;
 }
 
-/* Botones */
 .btn-secondary {
     background-color: #6c757d;
     color: #ffffff;
@@ -207,21 +128,12 @@ body.dark-mode .info-card .value {
     background-color: #5a6268;
 }
 
-/* Modo oscuro para botones */
-body.dark-mode .btn-secondary {
-    background-color: #5a6268;
-}
-
-body.dark-mode .btn-secondary:hover {
-    background-color: #444;
-}
-
-/* Contenido y tarjetas */
 .content-card {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-between;
+    margin-bottom: 16px;
 }
 
 .info-card {
@@ -246,13 +158,63 @@ body.dark-mode .btn-secondary:hover {
     color: #333;
 }
 
-/* Modo oscuro para las tarjetas de información */
-body.dark-mode .info-card {
-    background-color: var(--color-bg-dark);
-    border: 1px solid #444;
+.empleado-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
-body.dark-mode .info-card .title,
-body.dark-mode .info-card .value {
-    color: var(--color-text-dark);
+.empleado-info-grid .card {
+    padding: 1.5rem;
+    margin: 0;
+}
+
+.empleado-info-grid .card p {
+    text-align: left;
+}
+
+.empleado-info-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 20px;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+.div2 {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.div3 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.grid-doble {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 30px;
+}
+
+.btn-final-show-e .btn {
+    margin-top: 20px;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.tab.active {
+    font-weight: 600;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.tab-content {
+    margin-top: 1rem;
+}
+
+.d-none {
+    display: none;
 }

@@ -82,10 +82,10 @@
                     <td>${{ number_format($nomina->total_comisiones, 2) }}</td>
                     <td>${{ number_format($nomina->total, 2) }}</td>
                     <td>
-                        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary">Ver Detalles</a>
-                        <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary">Editar</a>
+                        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary btn-style">Ver Detalles</a>
+                        <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary btn-style">Editar</a>
                         @if ($nomina->estado != 'Liquidado')
-                        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary">Liquidar</a>
+                        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary btn-style">Liquidar</a>
                         @endif
                         <form id="formEliminarNomina{{ $nomina->id }}" action="{{ route('nominas.destroy', $nomina->id) }}" method="POST" class="form-eliminar-nomina">
                             @csrf

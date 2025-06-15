@@ -40,7 +40,7 @@
             <td>{{ $pago->fecha_pago}}</td>
             <td>$ {{ number_format($pago->total_pagado,2)}}</td>
             <td>
-              <button type="button" class="btn btn-secondary"
+              <button type="button" class="btn btn-secondary btn-style"
                 data-bs-toggle="modal"
                 data-bs-target="#modalDetallePago"
                 data-pago='@json($pago)'>
@@ -49,7 +49,7 @@
               <form action="{{ route('pagos.destroy', $pago->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <button type="submit" class="btn btn-danger btn-style">Eliminar</button>
               </form>
             </td>
           </tr>
@@ -79,7 +79,7 @@
         <p><strong>Estado del Pago:</strong> <span id="modal-estado-pago"></span></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

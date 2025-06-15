@@ -89,14 +89,14 @@
 
     <div style="display:flex; justify-content: space-between;">
         <div style="display:flex; gap: 0.5rem;">
-            <a href="{{ route('incapacidades.index') }}" class="btn btn-secondary">Volver</a>
-            <a class="btn btn-primary" onclick="printIncapacidad()">Imprimir</a>
+            <a href="{{ route('incapacidades.index') }}" class="btn btn-secondary btn-style">Volver</a>
+            <a class="btn btn-primary btn-style" onclick="printIncapacidad()">Imprimir</a>
         </div>
 
         @if ($incapacidad->estado != 'Revisado')
         <div style="display:flex; gap: 0.5rem;">
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalRechazo">Rechazar</button>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAprobacion">Aceptar</button>
+            <button class="btn btn-danger btn-style" data-bs-toggle="modal" data-bs-target="#modalRechazo">Rechazar</button>
+            <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalAprobacion">Aceptar</button>
         </div>
         @endif
 
@@ -122,8 +122,8 @@
                     <input type="hidden" name="accion" value="aceptar">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary btn-style">Enviar</button>
                 </div>
             </div>
         </form>
@@ -149,8 +149,8 @@
                     <input type="hidden" name="accion" value="rechazar">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Enviar</button>
+                    <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger btn-style">Enviar</button>
                 </div>
             </div>
         </form>

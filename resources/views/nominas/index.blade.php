@@ -10,11 +10,11 @@
   <div class="titlebutton">
     <p>Calcula los devengados y deducciones de las personas que integran tu equipo de trabajo</p>
     <!-- Botón para abrir el modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#liquidacionModal">
+    <button type="button" class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#liquidacionModal">
       Nuevo periodo de liquidación
     </button>
   </div>
-  <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">Filtar
+  <button type="button" class="btn btn-primary btn-style" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">Filtar
   </button>
   <table class="table">
     <thead>
@@ -35,7 +35,7 @@
         <td>{{ number_format($liquidacion->total_deducciones, 2) }}</td>
         <td>{{ number_format($liquidacion->total_comisiones, 2) }}</td>
         <td>{{ number_format($liquidacion->total, 2) }}</td>
-        <td><a href="{{ route('liquidaciones.show', $liquidacion->id) }}" class="btn btn-secondary">Ir a Liquidar</a></td>
+        <td><a href="{{ route('liquidaciones.show', $liquidacion->id) }}" class="btn btn-secondary btn-style">Ir a Liquidar</a></td>
       </tr>
       @endforeach
     </tbody>

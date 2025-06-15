@@ -16,6 +16,13 @@ class IncapacidadController extends Controller
         return view('incapacidades.index', compact('incapacidades'));
     }
 
+    // GET/create
+    public function create()
+    {
+        return view('incapacidades.create');
+    }
+
+
     // GET /incapacidades/{id}
     public function show($id)
     {

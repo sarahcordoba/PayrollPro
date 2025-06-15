@@ -1,26 +1,26 @@
 [
     {
         "id": "230201",
-        "nombre": "PROTECCIÓN"
+        "nombre": "Protección"
     },
     {
         "id": "230301",
-        "nombre": "PORVENIR"
+        "nombre": "Porvenir"
     },
     {
         "id": "230901",
-        "nombre": "OLD MUTUAL (ANTES SKANDIA)"
+        "nombre": "Old Mutual (Antes Skandia)"
     },
     {
         "id": "231001",
-        "nombre": "COLFONDOS"
+        "nombre": "Colfondos"
     },
     {
         "id": "FNA",
-        "nombre": "Fondo nacional del ahorro"
+        "nombre": "Fondo Nacional Del Ahorro"
     },
     {
         "id": "FPSM",
-        "nombre": "Fondo de prestaciones sociales del magisterio"
+        "nombre": "Fondo De Prestaciones Sociales Del Magisterio"
     }
 ]

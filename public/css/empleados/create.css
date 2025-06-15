@@ -32,44 +32,6 @@ p {
     margin-bottom: 30px;
 }
 
-/* .steps-header {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.step {
-    background-color: var(--color-step-light);
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 0 5px;
-    flex: 1;
-    text-align: center;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.dark-mode .step {
-    background-color: var(--color-step-dark);
-}
-
-.steps-header .step.active {
-    background-color: var(--color-primary-light);
-    color: var(--color-sb-light);
-}
-
-.dark-mode .steps-header .step.active {
-    background-color: var(--color-primary-dark);
-    color: var(--color-sb-light);
-} */
-
-
-.dark-mode .step-container{
-    background-color: var(--color-form-dark);
-}
-
 .step {
     display: flex;
     align-items: center;
@@ -86,16 +48,8 @@ p {
     font-size: 20px;
 }
 
-.dark-mode .step-indicator {
-    background-color: var(--color-step-dark);
-}
-
 .step.active .step-indicator {
     background-color: var(--color-primary-light);
-}
-
-.dark-mode .step.active .step-indicator {
-    background-color: var(--color-primary-dark);
 }
 
 .step-container {
@@ -123,23 +77,12 @@ p {
     transition: width 0.5s;
 }
 
-.dark-mode .progress-bar-fill {
-
-    background-color: var(--color-primary-dark);
-}
-
 .card {
     margin-bottom: 20px;
     border: none !important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
-
-.dark-mode .card {
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-    background-color: var(--color-bg-dark);
-}
-
 .card-header {
     background-color: var(--color-card-header);
     color: var(--color-sb-light);
@@ -168,6 +111,10 @@ p {
 
 .form-section.active {
     display: block;
+}
+
+.form-section .card{
+    margin-bottom: 2rem !important;
 }
 
 .form-group {

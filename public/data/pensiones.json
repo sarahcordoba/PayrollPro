@@ -1,22 +1,22 @@
 [
-    {
-        "id": "25-14",
-        "nombre": "COLPENSIONES"
-    },
-    {
-        "id": "231001",
-        "nombre": "COLFONDOS"
-    },
-    {
-        "id": "230201",
-        "nombre": "PROTECCIÓN"
-    },
-    {
-        "id": "230901",
-        "nombre": "OLD MUTUAL (ANTES SKANDIA)"
-    },
-    {
-        "id": "230301",
-        "nombre": "PORVENIR"
-    }
+  {
+    "id": "25-14",
+    "nombre": "Colpensiones"
+  },
+  {
+    "id": "231001",
+    "nombre": "Colfondos"
+  },
+  {
+    "id": "230201",
+    "nombre": "Protección"
+  },
+  {
+    "id": "230901",
+    "nombre": "Old Mutual (Antes Skandia)"
+  },
+  {
+    "id": "230301",
+    "nombre": "Porvenir"
+  }
 ]
