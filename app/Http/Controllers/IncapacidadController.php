@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Incapacidad;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class IncapacidadController extends Controller
 {
@@ -33,24 +34,48 @@ class IncapacidadController extends Controller
     // POST /incapacidades
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'id_empleado' => 'required|integer|exists:empleados,id',
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'dias_incapacidad' => 'nullable|integer|min:0',
-            'fecha_registro' => 'required|date',
-            'tipo_incapacidad' => 'required|string|max:100',
-            'descripcion' => 'nullable|string|max:1000',
-            'soporte' => 'nullable|string|max:500',
-            'estado' => 'nullable|string|max:50',
-            'fecha_revision' => 'nullable|date',
-            'id_rrhh' => 'nullable|integer|exists:users,id',
-            'observaciones_rrhh' => 'nullable|string|max:1000',
-        ]);
+        try {
+            $request->validate([
+                'fecha_contratacion' => 'required|date',
+                'fecha_fin_incapacidad' => 'required|date|after_or_equal:fecha_contratacion',
+                'tipo_incapacidad' => 'required|string|max:100',
+                'descripcion' => 'nullable|string|max:1000',
+                'soporte' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            ]);
 
-        $incapacidad = Incapacidad::create($validated);
-        return response()->json($incapacidad, 201);
+            $soportePath = null;
+            if ($request->hasFile('soporte')) {
+                $soportePath = $request->file('soporte')->store('incapacidades', 'public');
+            }
+
+            /** @var \App\Models\User $user */ // <-- This PHPDoc hint is for Intelephense
+            $user = Auth::user();
+            $empleadoId = $user->empleado->id;
+            if (!$empleadoId) {
+                return back()->withErrors(['No se encontró un empleado asociado al usuario actual.']);
+            }
+
+            $dias = \Carbon\Carbon::parse($request->fecha_contratacion)->diffInDays(\Carbon\Carbon::parse($request->fecha_fin_incapacidad)) + 1;
+
+            Incapacidad::create([
+                'id_empleado' => $empleadoId,
+                'fecha_inicio' => $request->fecha_contratacion,
+                'fecha_fin' => $request->fecha_fin_incapacidad,
+                'dias_incapacidad' => $dias,
+                'fecha_registro' => now(),
+                'tipo_incapacidad' => $request->tipo_incapacidad,
+                'descripcion' => $request->descripcion,
+                'soporte' => $soportePath,
+                'estado' => 'Pendiente',
+            ]);
+
+            return redirect()->route('incapacidades.index')->with('success', 'Incapacidad registrada exitosamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al registrar incapacidad: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'Ocurrió un error al guardar la incapacidad.']);
+        }
     }
+
 
     // GET /incapacidades/{id}/edit
     public function edit($id)

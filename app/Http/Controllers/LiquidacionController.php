@@ -61,7 +61,14 @@ class LiquidacionController extends Controller
     {
         $liquidacion = Liquidacion::findOrFail($id);
         $nominas = Nomina::where('idLiquidacion', $id)->get(); // Obtiene las nóminas relacionadas con esta liquidación
-        $empleados = Empleado::all(); // Filtra empleados asociados al usuario logueado
+
+        $empleados = Empleado::whereNotIn('id', function ($query) use ($id) {
+            $query->select('empleado_id')
+                  ->from('nominas')
+                  ->where('idLiquidacion', $id);
+        })->get();
+
+        $empleados = Empleado::where('empleado_id'); // Filtra empleados asociados al usuario logueado
         return view('liquidaciones.show', compact('liquidacion', 'nominas', 'empleados'));
     }
 
@@ -106,9 +113,9 @@ class LiquidacionController extends Controller
 
         // Loop through each nomina and delete associated deducciones and comisiones
         //foreach ($nominas as $nomina) {
-            // Get the related DeduccionNomina and ComisionNomina records and delete them
-            //DeduccionNomina::where('nomina_id', $nomina->id)->delete();
-            //ComisionNomina::where('nomina_id', $nomina->id)->delete();
+        // Get the related DeduccionNomina and ComisionNomina records and delete them
+        //DeduccionNomina::where('nomina_id', $nomina->id)->delete();
+        //ComisionNomina::where('nomina_id', $nomina->id)->delete();
         //}
 
         // Delete all the nominas associated with the liquidacion

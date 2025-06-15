@@ -56,11 +56,11 @@
             {{-- lista de vainos --}}
             <ul class="nav-list">
                 @foreach ($menuItems as $item)
-                    <li>
-                        <a href="{{ $item['url'] }}">
-                            <i class="{{ $item['icon'] }}"></i> {{ $item['name'] }}
-                        </a>
-                    </li>
+                <li>
+                    <a href="{{ $item['url'] }}">
+                        <i class="{{ $item['icon'] }}"></i> {{ $item['name'] }}
+                    </a>
+                </li>
                 @endforeach
             </ul>
             {{-- botón de modo oscuro --}}
@@ -77,10 +77,8 @@
             </button>
 
             <!-- Button to show user profile -->
-            <button id="modeToggle" class="mode-toggle btn-style"
-                onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
-                Salir
-            </button>
+            <a href="{{ route('empleados.showself') }}" class="btn btn-primary btn-style">Perfil</a>
+
         </div>
 
 
@@ -103,35 +101,35 @@
 
     @yield('scripts')
     @if (session('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const toast = document.getElementById('liveToast');
-                const toastMessage = document.getElementById('toastMessage');
-                toastMessage.textContent = "{{ session('success') }}";
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toast = document.getElementById('liveToast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = "{{ session('success') }}";
 
-                toast.classList.remove('text-bg-danger');
-                toast.classList.add('text-bg-success');
+            toast.classList.remove('text-bg-danger');
+            toast.classList.add('text-bg-success');
 
-                const toastBootstrap = new bootstrap.Toast(toast);
-                toastBootstrap.show();
-            });
-        </script>
+            const toastBootstrap = new bootstrap.Toast(toast);
+            toastBootstrap.show();
+        });
+    </script>
     @endif
 
     @if (session('error'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const toast = document.getElementById('liveToast');
-                const toastMessage = document.getElementById('toastMessage');
-                toastMessage.textContent = "{{ session('error') }}";
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toast = document.getElementById('liveToast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = "{{ session('error') }}";
 
-                toast.classList.remove('text-bg-success');
-                toast.classList.add('text-bg-danger');
+            toast.classList.remove('text-bg-success');
+            toast.classList.add('text-bg-danger');
 
-                const toastBootstrap = new bootstrap.Toast(toast);
-                toastBootstrap.show();
-            });
-        </script>
+            const toastBootstrap = new bootstrap.Toast(toast);
+            toastBootstrap.show();
+        });
+    </script>
     @endif
 
 

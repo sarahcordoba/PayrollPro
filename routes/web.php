@@ -73,6 +73,12 @@ use App\Models\Liquidacion;
 
 
     // Rutas personalizadas (acciones específicas)
+    Route::put('/incapacidades/{id}/review', [IncapacidadController::class, 'review'])->name('incapacidades.review');
+
+    Route::middleware(['auth', 'role:admin,rrhh,employee'])->group(function () {
+        Route::get('/profile', [EmpleadoController::class, 'showself'])->name('empleados.showself');
+    });
+
     Route::post('api/add/nomina', [NominaController::class, 'store']);
     // Route::get('/edit/nominas/{id}', [NominaController::class, 'edit'])->name('nominas.edit');
     Route::get('/liquidar/nominas/{id}', [NominaController::class, 'liquidar'])->name('nominas.liquidar');

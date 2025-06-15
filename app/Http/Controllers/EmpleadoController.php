@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use App\Models\Departamento;
+use App\Models\Incapacidad;
+use App\Models\Nomina;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -30,11 +32,11 @@ class EmpleadoController extends Controller
         return view('empleados.create');
     }
 
-    
+
     public function store(Request $request)
     {
         Log::info('Request Data: ', $request->all());
-    
+
         $validatedData = $request->validate([
             'primer_nombre' => 'required|string|max:255',
             'segundo_nombre' => 'nullable|string|max:255',
@@ -73,12 +75,12 @@ class EmpleadoController extends Controller
             'correo.unique' => 'El correo electrónico ya está registrado.',
             'numero_identificacion.unique' => 'Ya existe un empleado con ese número de identificación.'
         ]);
-    
+
         try {
             DB::transaction(function () use ($validatedData, $request) {
                 // Crear el empleado
                 $empleado = Empleado::create($validatedData);
-    
+
                 // Crear el usuario asociado
                 User::create([
                     'name' => $empleado->primer_nombre . ' ' . $empleado->primer_apellido,
@@ -88,19 +90,18 @@ class EmpleadoController extends Controller
                     'password' => Hash::make($empleado->numero_identificacion),
                 ]);
             });
-    
+
             return redirect()->route('empleados.index')
                 ->with('success', 'Empleado y usuario creados correctamente');
-    
         } catch (\Exception $e) {
             Log::error('Error al crear empleado y usuario: ' . $e->getMessage());
-    
+
             return back()->withInput()
                 ->withErrors(['error' => 'Hubo un problema al crear el empleado o el usuario. Intente nuevamente.']);
         }
     }
-    
-    
+
+
 
     // Mostrar un empleado específico
     public function show($id)
@@ -108,9 +109,16 @@ class EmpleadoController extends Controller
         // $empleado = Empleado::findOrFail($id);
         // return view('empleados.show', data: compact('empleado'));
 
+        $profile = false;
 
         // Obtén el empleado
         $empleado = Empleado::findOrFail($id);
+
+        // Sacamos nominas con su id
+        $nominas = Nomina::where('empleado_id', $id);
+
+        // Sacamos incapacidades con su id
+        $incapacidades = Incapacidad::where('id_empleado', $id)->get();
 
         // Fecha de contratación
         $fechaContratacion = Carbon::parse($empleado->fecha_contratacion)->startOfDay(); // Eliminar horas
@@ -127,7 +135,46 @@ class EmpleadoController extends Controller
         }
 
         // Pasar los datos a la vista
-        return view('empleados.show', compact('empleado', 'diasTrabajados'));
+        return view('empleados.show', compact('empleado', 'diasTrabajados', 'nominas', 'incapacidades', 'profile'));
+    }
+
+    // Mostrar el empleado logeado
+    public function showself()
+    {
+        // $empleado = Empleado::findOrFail($id);
+        // return view('empleados.show', data: compact('empleado'));
+
+        $profile = true;
+
+        /** @var \App\Models\User $user */ // <-- This PHPDoc hint is for Intelephense
+        $user = Auth::user();
+        $id = $user->empleado->id;
+
+        // Obtén el empleado
+        $empleado = Empleado::findOrFail($id);
+
+        // Sacamos nominas con su id
+        $nominas = Nomina::where('empleado_id', $id)->get();
+
+        // Sacamos incapacidades con su id
+        $incapacidades = Incapacidad::where('id_empleado', $id)->get();
+
+        // Fecha de contratación
+        $fechaContratacion = Carbon::parse($empleado->fecha_contratacion)->startOfDay(); // Eliminar horas
+
+        // Fecha actual (hoy)
+        $currentDate = Carbon::now()->startOfDay(); // Eliminar horas
+
+        // Si la fecha de contratación es hoy mismo, el empleado ya está trabajando
+        if ($fechaContratacion->isToday()) {
+            $diasTrabajados = 1;
+        } else {
+            // Calcular la diferencia en días completos
+            $diasTrabajados = $fechaContratacion->diffInDays($currentDate);
+        }
+
+        // Pasar los datos a la vista
+        return view('empleados.show', compact('empleado', 'diasTrabajados', 'nominas', 'incapacidades', 'profile'));
     }
 
     // Mostrar el formulario para editar un empleado existente
@@ -143,7 +190,7 @@ class EmpleadoController extends Controller
         $empleado = Empleado::findOrFail($id);
 
         $data = $request->all();
-        
+
         $request->validate([
             'primer_nombre' => 'required|string|max:255',
             'segundo_nombre' => 'nullable|string|max:255',

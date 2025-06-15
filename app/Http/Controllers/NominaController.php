@@ -45,6 +45,10 @@ class NominaController extends Controller
                 return response()->json(['error' => 'Empleado no encontrado'], 404);
             }
 
+            $yatiene = Nomina::where('empleado_id', $request->empleado_id)->where('idLiquidacion', $request->idLiquidacion)->first();
+            if ($yatiene) {
+                return response()->json(['error' => 'Empleado ya existe en liquidacion'], 503);
+            }
             // Calcular el total devengado, incluyendo el salario base
             $totalDevengado = $empleado->salario;
 
@@ -143,7 +147,20 @@ class NominaController extends Controller
             }
 
             DB::statement("CALL UpdateLiquidacionTotals($nomina->idLiquidacion)");
-            return response()->json($nomina, 201);
+            return response()->json([
+                'id' => $nomina->id,
+                'salario_base' => $nomina->salario_base,
+                'total_deducciones' => $nomina->total_deducciones,
+                'total_comisiones' => $nomina->total_comisiones,
+                'total' => $nomina->total,
+                'estado' => $nomina->estado,
+                'empleado' => [
+                    'primer_nombre' => $empleado->primer_nombre,
+                    'segundo_nombre' => $empleado->segundo_nombre,
+                    'primer_apellido' => $empleado->primer_apellido,
+                    'segundo_apellido' => $empleado->segundo_apellido,
+                ]
+            ], 201);
         } catch (\Exception $e) {
             // Registrar el error y retornar una respuesta JSON
             Log::error('Error en el método store: ' . $e->getMessage());

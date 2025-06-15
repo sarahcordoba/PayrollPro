@@ -60,6 +60,20 @@
                 </button>
             </div>
         </div>
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <table class="table table table-hover table-bordered table-responsive">
             <thead>
                 <tr>
@@ -72,7 +86,7 @@
                     <th scope="col">Acción</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody-nominas">
                 @foreach($nominas as $nomina)
                 <tr>
                     <td>{{ $nomina->empleado->primer_nombre}} {{ $nomina->empleado->segundo_nombre}} {{ $nomina->empleado->primer_apellido}} {{ $nomina->empleado->segundo_apellido}}</td> <!-- Asumiendo que Nomina tiene relación con Empleado -->
@@ -150,6 +164,30 @@
         });
     }
 
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('liveToast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // Limpia clases previas de color
+        toast.classList.remove('bg-success', 'bg-danger', 'bg-warning', 'bg-info');
+
+        // Aplica clase según el tipo
+        const typeClassMap = {
+            success: 'bg-success',
+            error: 'bg-danger',
+            warning: 'bg-warning',
+            info: 'bg-info'
+        };
+
+        toast.classList.add(typeClassMap[type] || 'bg-success');
+
+        // Mensaje y mostrar
+        toastMessage.textContent = message;
+        const toastElement = new bootstrap.Toast(toast);
+        toastElement.show();
+    }
+
+
     // Función para manejar la creación de las nóminas seleccionadas
     function crearNominas() {
         const selectedEmployees = [];
@@ -164,9 +202,10 @@
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const idLiquidacion = document.querySelector('[data-bs-target="#liquidacionModal"]').getAttribute('data-liquidacion-id');
-        // Enviar empleados seleccionados al backend
 
-        //console.log(selectedEmployees);
+        let completed = 0;
+        const total = selectedEmployees.length;
+
         selectedEmployees.forEach((employee) => {
             fetch('/api/add/nomina', {
                     method: 'POST',
@@ -181,41 +220,81 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Nominas creadas:", data);
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('liquidacionModal'));
-                    modal.hide();
-                    location.reload();
+                    // Insertar nueva fila en la tabla
+                    const tbody = document.getElementById('tbody-nominas');
+                    const tr = document.createElement('tr');
 
-                    // Aquí puedes agregar código para actualizar la tabla o la vista después de la creación
+                    const nombreCompleto = `${data.empleado.primer_nombre} ${data.empleado.segundo_nombre || ''} ${data.empleado.primer_apellido} ${data.empleado.segundo_apellido || ''}`.trim();
+
+                    tr.innerHTML = `
+                <td>${nombreCompleto}</td>
+                <td>${data.id}</td>
+                <td>$${Number(data.salario_base).toLocaleString('es-CO', { minimumFractionDigits: 2 })}</td>
+                <td>$${Number(data.total_deducciones).toLocaleString('es-CO', { minimumFractionDigits: 2 })}</td>
+                <td>$${Number(data.total_comisiones).toLocaleString('es-CO', { minimumFractionDigits: 2 })}</td>
+                <td>$${Number(data.total).toLocaleString('es-CO', { minimumFractionDigits: 2 })}</td>
+                <td>
+                    <a href="/nominas/${data.id}" class="btn btn-secondary btn-style">Ver Detalles</a>
+                    <a href="/nominas/${data.id}/edit" class="btn btn-secondary btn-style">Editar</a>
+                    <a href="/nominas/${data.id}" class="btn btn-secondary btn-style">Liquidar</a>
+                    <form id="formEliminarNomina${data.id}" action="/nominas/${data.id}" method="POST" class="form-eliminar-nomina">
+                        <input type="hidden" name="_token" value="${csrfToken}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger btn-style"><i class="bi bi-trash"></i></button>
+                    </form>
+                </td>
+            `;
+
+                    tbody.appendChild(tr);
+
+                    completed++;
+                    if (completed === total) {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('liquidacionModal'));
+                        modal.hide();
+                        showToast("Nóminas creadas exitosamente.");
+                    }
+
+                    bindEliminarNominas();
+
                 })
-                .catch(error => console.error("Error al crear las nóminas:", error));
+                .catch(error => {
+                    showToast("Error al crear la nómina:", 'error');
+                    console.error("Error al crear la nómina:", error);
+                });
         });
-
     }
 
-    document.querySelectorAll('.form-eliminar-nomina').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (!confirm('¿Estás seguro de que deseas eliminar esta nómina?')) return;
 
-            const url = this.action;
-            const csrf = this.querySelector('input[name="_token"]').value;
+    function bindEliminarNominas() {
+        document.querySelectorAll('.form-eliminar-nomina').forEach(form => {
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                if (!confirm('¿Estás seguro de que deseas eliminar esta nómina?')) return;
 
-            fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': csrf,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    location.reload();
-                } else {
-                    alert('Ocurrió un error al eliminar la nómina.');
-                }
-            }).catch(() => alert('Error de red al intentar eliminar la nómina.'));
+                const url = this.action;
+                const csrf = this.querySelector('input[name="_token"]').value;
+
+                fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': csrf,
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            this.closest('tr').remove();
+                            showToast("Nómina eliminada correctamente.");
+                        } else {
+                            showToast('Ocurrió un error al eliminar la nómina.', 'error');
+                        }
+                    })
+                    .catch(() => showToast('Error de red al intentar eliminar la nómina.', 'error'));
+            };
         });
-    });
+    }
+
+    bindEliminarNominas();
 </script>
 @endsection

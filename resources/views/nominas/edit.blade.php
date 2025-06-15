@@ -332,9 +332,34 @@
 </div>
 </div>
 
+
+
 <script>
     // Configuración del token CSRF para las solicitudes
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('liveToast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // Limpia clases previas de color
+        toast.classList.remove('bg-success', 'bg-danger', 'bg-warning', 'bg-info');
+
+        // Aplica clase según el tipo
+        const typeClassMap = {
+            success: 'bg-success',
+            error: 'bg-danger',
+            warning: 'bg-warning',
+            info: 'bg-info'
+        };
+
+        toast.classList.add(typeClassMap[type] || 'bg-success');
+
+        // Mensaje y mostrar
+        toastMessage.textContent = message;
+        const toastElement = new bootstrap.Toast(toast);
+        toastElement.show();
+    }
 
     document.addEventListener("DOMContentLoaded", function() {
         // Get all percentage checkboxes
