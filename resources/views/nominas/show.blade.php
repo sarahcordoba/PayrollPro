@@ -175,6 +175,11 @@
             <a class="btn btn-primary btn-style" onclick="printIncapacidad()">Imprimir</a>
             @endif
 
+            <!-- Trigger Button
+            <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
+                Liquidar
+            </button> -->
+
             @if($allow)
             <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary btn-style">Cancelar</a>
             <div style="display:flex;  gap: .5rem;">

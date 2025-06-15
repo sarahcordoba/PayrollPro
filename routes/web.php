@@ -81,7 +81,7 @@ use App\Models\Liquidacion;
 
     Route::post('api/add/nomina', [NominaController::class, 'store']);
     // Route::get('/edit/nominas/{id}', [NominaController::class, 'edit'])->name('nominas.edit');
-    Route::get('/liquidar/nominas/{id}', [NominaController::class, 'liquidar'])->name('nominas.liquidar');
+    Route::put('/liquidar/nominas/{id}', [NominaController::class, 'liquidar'])->name('nominas.liquidar');
 
 
     Route::post('api/add/deducciones', [DeduccionController::class, 'store']);

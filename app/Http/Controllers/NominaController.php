@@ -201,26 +201,46 @@ class NominaController extends Controller
 
     public function liquidar(Request $request, $id)
     {
+        Log::info('Mondongo1: ', ['paymentOption' => $request['paymentOption']]);
+
+
         $request->validate([
-            'paymentOption' => 'required|string|in:transferencia_bancaria,pago_efectivo",cheque_bancario,pago_especie',
+            'paymentOption' => 'required|string|in:transferencia_bancaria,pago_efectivo,cheque_bancario,pago_especie',
         ]);
 
+        Log::info('Mondongo2');
+
+
         $nomina = Nomina::findOrFail($id);
+
+        Log::info('Mondongo3');
+
 
         $nomina->estado = 'Liquidado';
         $nomina->metodopago = $request->paymentOption;
         $nomina->save();
+        
+        Log::info('Mondongo4');
 
         $liquidacion = Liquidacion::findOrFail($nomina->idLiquidacion);
+
+        Log::info('Mondongo5');
+
 
         $total = Nomina::where('idLiquidacion', $liquidacion->id)->count();
         $liquidadas = Nomina::where('idLiquidacion', $liquidacion->id)
             ->where('estado', 'Liquidado')
             ->count();
 
+        Log::info('Mondong6');
+
+
         $progreso = $total > 0 ? round(($liquidadas / $total) * 100, 2) : 0;
         $liquidacion->progreso = $progreso;
         $liquidacion->save();
+
+        Log::info('Mondong7');
+
 
         // Crear el pago automáticamente
         $pago = Pago::create(attributes: [
@@ -233,8 +253,14 @@ class NominaController extends Controller
             'estado_pago'        => 'Completado',
         ]);
 
+        Log::info('Mondong8');
+
         $pago->save();
 
+        Log::info('Mondongo?');
+        $empleado = $nomina->empleado;
+        $empleado->notify(new \App\Notifications\PaymentNotification());
+        
         return redirect()->route('nominas.show', $nomina->id)
             ->with('success', 'Nómina liquidada y pago registrado automáticamente.');
     }
