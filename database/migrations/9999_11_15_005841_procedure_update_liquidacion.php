@@ -16,9 +16,9 @@ return new class extends Migration
             CREATE PROCEDURE UpdateLiquidacionTotals(IN liquidacionId INT)
             BEGIN
     DECLARE num_nominas INT;
-    DECLARE ttotal_salario DECIMAL(10,2) DEFAULT 0;
-    DECLARE ttotal_deducciones DECIMAL(10,2) DEFAULT 0;
-    DECLARE ttotal_comisiones DECIMAL(10,2) DEFAULT 0;
+    DECLARE ttotal_salario DECIMAL(20,2) DEFAULT 0;
+    DECLARE ttotal_deducciones DECIMAL(20,2) DEFAULT 0;
+    DECLARE ttotal_comisiones DECIMAL(20,2) DEFAULT 0;
     DECLARE done INT DEFAULT 0;
     DECLARE current_nomina_id INT;
 

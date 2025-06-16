@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,18 +29,24 @@ class AppServiceProvider extends ServiceProvider
         }
 
         View::composer('*', function ($view) {
+            /** @var \App\Models\User $user */ // <-- This PHPDoc hint is for Intelephense
+            $user = Auth::user();
+
             $menuItems = [
-                ['name' => 'Inicio', 'url' => '/', 'icon' => 'bi bi-house-door'],
-                //['name' => 'Asistente Habilitación', 'url' => '/asistente', 'icon' => 'bi bi-person-check'],
-                ['name' => 'Empleados', 'url' => '/empleados', 'icon' => 'bi bi-person-lines-fill'],
-                ['name' => 'Liquidación', 'url' => '/liquidaciones', 'icon' => 'bi bi-cash'],
-                ['name' => 'Incapacidades', 'url' => '/incapacidades', 'icon' => 'bi bi-file-medical'],
-                ['name' => 'Pagos', 'url' => '/pagos', 'icon' => 'bi bi-receipt']
-                //['name' => 'Colilla de Pago', 'url' => '/colilla-pago', 'icon' => 'bi bi-file-earmark-text'],
-               // ['name' => 'Eliminación', 'url' => '/eliminacion', 'icon' => 'bi bi-trash'],
-               // ['name' => 'Configuración', 'url' => '/configuracion', 'icon' => 'bi bi-gear'],
+                ['name' => 'Inicio', 'url' => '/', 'icon' => 'bi bi-house-door', 'roles' => ['admin', 'rrhh', 'employee']],
+                ['name' => 'Empleados', 'url' => '/empleados', 'icon' => 'bi bi-person-lines-fill', 'roles' => ['admin', 'rrhh']],
+                ['name' => 'Liquidación', 'url' => '/liquidaciones', 'icon' => 'bi bi-cash', 'roles' => ['admin']],
+                ['name' => 'Incapacidades', 'url' => '/incapacidades', 'icon' => 'bi bi-file-medical', 'roles' => ['admin', 'rrhh' ]],
+                ['name' => 'Pagos', 'url' => '/pagos', 'icon' => 'bi bi-receipt', 'roles' => ['admin', 'rrhh']]
             ];
-            $view->with('menuItems', $menuItems);
+
+            $userRole = $user ? $user->role : null;
+
+            $filteredItems = array_filter($menuItems, function ($item) use ($userRole) {
+                return empty($item['roles']) || in_array($userRole, $item['roles']);
+            });            
+
+            $view->with('menuItems', $filteredItems);
         });
     }
 }
