@@ -165,7 +165,7 @@ $tiposTrabajador = [
 
                             <li class="list-group-item flex-fill">
                                 <strong>Tiempo laborado</strong><br>
-                                {{ $empleado->dias_trabajados }} días
+                                {{ $diasTrabajados }} días
                             </li>
 
                             <li class="list-group-item flex-fill">

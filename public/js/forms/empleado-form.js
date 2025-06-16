@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     salaryInput.addEventListener('input', () => {
-        salaryInput.value = salaryInput.value.replace(/[^0-9]/g, '').slice(0, 20);
+        salaryInput.value = salaryInput.value.replace(/[^0-9]/g, '').slice(0, 11);
     });
 
 

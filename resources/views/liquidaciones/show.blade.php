@@ -142,7 +142,7 @@
                             <td><input type="checkbox" class="employee-checkbox" value="{{ $empleado->id }}"></td>
                             <td>{{ $empleado->primer_nombre }} {{ $empleado->segundo_nombre }} {{ $empleado->primer_apellido }} {{ $empleado->segundo }}</td>
                             <td>{{ number_format($empleado->salario, 2) }}</td>
-                            <td>{{ $empleado->identificacion }}</td>
+                            <td>{{ $empleado->numero_identificacion }}</td>
                         </tr>
                         @endforeach
                     </tbody>
