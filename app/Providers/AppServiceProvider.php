@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
         if (env('APP_ENV') !== 'local') {
             //para que funcione enviar correo cuando se monte a un servidor se quita
-            // URL::forceScheme('https');
+            URL::forceScheme('https');
         }
 
         View::composer('*', function ($view) {
