@@ -36,13 +36,13 @@ class PaymentNotification extends Notification
     {
         return (new MailMessage)
             ->subject('Tu recibo de nómina ya está disponible')
-            ->greeting('Hola ' . $notifiable->name . ',')
+            ->greeting('Hola ' . $notifiable->primer_nombre . ',')
             ->line('Te informamos que tu recibo de nómina ha sido generado exitosamente.')
             ->line('Puedes revisarlo y descargarlo desde la plataforma.')
             ->action('Ver Recibo de Nómina', url('/nominas'))
-            ->line('Gracias por ser parte de nuestro equipo.');
+            ->line('Gracias por ser parte de nuestro equipo.')->salutation('Saludos cordiales, el equipo de PayrollPro');
     }
-    
+
 
     /**
      * Get the array representation of the notification.

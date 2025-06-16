@@ -26,13 +26,18 @@ class NominaController extends Controller
     // Mostrar una nómina específica
     public function show($id)
     {
+        $fromIndex = request()->query('fromIndex', false); // devuelve true/false
+
+        Log::info($fromIndex);
+
+        
         $nomina = Nomina::findOrFail($id);
         $deduccionesAplicadas = DeduccionNomina::where('nomina_id', $nomina->id)->get();
         $comisionesAplicadas = ComisionNomina::where('nomina_id', $nomina->id)->get();
         $deduccionesDisponibles = Deduccion::all();
         $comisionesDisponibles = Comision::all();
         //return response()->json($nomina);
-        return view('nominas.show', compact('nomina', 'deduccionesAplicadas', 'comisionesAplicadas')); //, 'deduccionesDisponibles', 'comisionesDisponibles'));
+        return view('nominas.show', compact('nomina', 'deduccionesAplicadas', 'comisionesAplicadas', 'fromIndex')); //, 'deduccionesDisponibles', 'comisionesDisponibles'));
     }
 
     // Crear una nueva nómina
@@ -258,6 +263,7 @@ class NominaController extends Controller
         $pago->save();
 
         Log::info('Mondongo?');
+
         $empleado = $nomina->empleado;
         $empleado->notify(new \App\Notifications\PaymentNotification());
         

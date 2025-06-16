@@ -156,6 +156,11 @@ class EmpleadoController extends Controller
         // Sacamos nominas con su id
         $nominas = Nomina::where('empleado_id', $id)->get();
 
+        foreach ($nominas as $nomina) {
+            $nomina->pago = \App\Models\Pago::where('nomina_id', $nomina->id)->first(); // o `null` si no existe
+        }
+        
+
         // Sacamos incapacidades con su id
         $incapacidades = Incapacidad::where('id_empleado', $id)->get();
 

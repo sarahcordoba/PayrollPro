@@ -170,20 +170,17 @@
         </div>
 
         <div style="display:flex; justify-content: space-between;">
-            @if(!$allow)
+            @if($fromIndex)
+            <a href="{{ route('liquidaciones.show', $nomina->idLiquidacion) }}" class="btn btn-secondary btn-style">Volver</a>
+            @else
             <a href="{{ route('empleados.showself') }}" class="btn btn-secondary btn-style">Volver</a>
-            <a class="btn btn-primary btn-style" onclick="printIncapacidad()">Imprimir</a>
             @endif
 
-            <!-- Trigger Button
-            <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
-                Liquidar
-            </button> -->
-
-            @if($allow)
-            <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary btn-style">Cancelar</a>
             <div style="display:flex;  gap: .5rem;">
                 <a class="btn btn-primary btn-style" onclick="printIncapacidad()">Imprimir</a>
+
+
+                @if($allow)
                 <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-primary btn-style">Editar</a>
 
                 @if ($nomina->estado != 'Liquidado')
@@ -192,8 +189,8 @@
                     Liquidar
                 </button>
                 @endif
+                @endif
             </div>
-            @endif
 
         </div>
     </div>

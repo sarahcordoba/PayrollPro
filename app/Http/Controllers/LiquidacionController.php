@@ -64,11 +64,11 @@ class LiquidacionController extends Controller
 
         $empleados = Empleado::whereNotIn('id', function ($query) use ($id) {
             $query->select('empleado_id')
-                  ->from('nominas')
-                  ->where('idLiquidacion', $id);
+                ->from('nominas')
+                ->where('idLiquidacion', $id);
         })->get();
 
-        $empleados = Empleado::where('empleado_id'); // Filtra empleados asociados al usuario logueado
+        // $empleados = Empleado::where('empleado_id'); // Filtra empleados asociados al usuario logueado
         return view('liquidaciones.show', compact('liquidacion', 'nominas', 'empleados'));
     }
 
@@ -131,5 +131,25 @@ class LiquidacionController extends Controller
     public function getLiquidaciones()
     {
         return response()->json(Liquidacion::all());
+    }
+
+    public function liquidarall($id)
+    {
+        $nominas = Nomina::where('idLiquidacion', $id)
+            ->where('estado', 'Por liquidar')
+            ->get();
+
+        $nominaController = new NominaController();
+
+        foreach ($nominas as $nomina) {
+            $request = new Request([
+                'paymentOption' => 'transferencia_bancaria' // o cualquier otro valor válido
+            ]);
+
+            // Puedes envolver esto en un try-catch si quieres manejar errores
+            $nominaController->liquidar($request, $nomina->id);
+        }
+
+        return redirect()->back()->with('success', 'Todas las nóminas fueron liquidadas.');
     }
 }

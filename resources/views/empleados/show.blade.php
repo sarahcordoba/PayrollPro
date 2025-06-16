@@ -320,7 +320,24 @@ $tiposTrabajador = [
                                             <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-sm btn-secondary">
                                                 <i class="bi bi-eye"></i>
                                             </a>
+
+                                            @if($nomina->pago)
+                                            <button
+                                                class="btn btn-sm btn-primary ver-pago-btn"
+                                                data-id-empleado="{{ $empleado->id }}"
+                                                data-nombre="{{ $empleado->primer_nombre }} {{ $empleado->primer_apellido }}"
+                                                data-fecha-pago="{{ $nomina->pago->fecha_pago }}"
+                                                data-total-devengado="{{ $nomina->pago->total_devengado }}"
+                                                data-total-deducciones="{{ $nomina->pago->total_deducciones }}"
+                                                data-total-pagado="{{ $nomina->pago->total_pagado }}"
+                                                data-estado-pago="{{ $nomina->pago->estado }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalDetallePago">
+                                                <i class="bi bi-receipt-cutoff"></i>
+                                            </button>
+                                            @endif
                                         </td>
+
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -384,6 +401,30 @@ $tiposTrabajador = [
 
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDetallePago" tabindex="-1" aria-labelledby="modalDetallePagoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDetallePagoLabel">Detalle del Pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>ID Empleado:</strong> <span id="modal-id-empleado"></span></p>
+                    <p><strong>Nombre:</strong> <span id="modal-nombre"></span></p>
+                    <p><strong>Fecha de Pago:</strong> <span id="modal-fecha-pago"></span></p>
+                    <p><strong>Total Devengado:</strong> $<span id="modal-total-devengado"></span></p>
+                    <p><strong>Total Deducciones:</strong> $<span id="modal-total-deducciones"></span></p>
+                    <p><strong>Total Pagado:</strong> $<span id="modal-total-pagado"></span></p>
+                    <p><strong>Estado del Pago:</strong> <span id="modal-estado-pago"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @endsection
 
     @section('scripts')
@@ -399,6 +440,22 @@ $tiposTrabajador = [
                         'd-none'));
                     const target = tab.getAttribute('data-target');
                     document.querySelector(target).classList.remove('d-none');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const botones = document.querySelectorAll('.ver-pago-btn');
+
+            botones.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.getElementById('modal-id-empleado').textContent = this.dataset.idEmpleado;
+                    document.getElementById('modal-nombre').textContent = this.dataset.nombre;
+                    document.getElementById('modal-fecha-pago').textContent = this.dataset.fechaPago;
+                    document.getElementById('modal-total-devengado').textContent = this.dataset.totalDevengado;
+                    document.getElementById('modal-total-deducciones').textContent = this.dataset.totalDeducciones;
+                    document.getElementById('modal-total-pagado').textContent = this.dataset.totalPagado;
+                    document.getElementById('modal-estado-pago').textContent = this.dataset.estadoPago;
                 });
             });
         });

@@ -47,4 +47,9 @@ class Empleado extends Model
         'fondo_pensiones',
         'fondo_cesantias',
     ];
+
+    public function routeNotificationForMail($notification)
+    {
+        return $this->correo; // o el campo correcto si no es "correo"
+    }
 }
