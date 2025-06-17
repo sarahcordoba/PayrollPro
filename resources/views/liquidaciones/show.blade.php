@@ -97,8 +97,8 @@
                     <td>${{ number_format($nomina->total, 2) }}</td>
                     <td>
                         <a href="{{ route('nominas.show', ['nomina' => $nomina->id, 'fromIndex' => true]) }}" class="btn btn-secondary btn-style">Ver Detalles</a>
-                        <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary btn-style">Editar</a>
                         @if ($nomina->estado != 'Liquidado')
+                        <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary btn-style">Editar</a>
                         <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
                             Liquidar
                         </button>
@@ -159,6 +159,7 @@
     </div>
 </div>
 
+@isset($nomina)
 <!-- Modal Liquidar -->
 <div class="modal fade" id="modalLiquidar" tabindex="-1" aria-labelledby="modalLiquidarLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -175,7 +176,7 @@
                     <select name="paymentOption" id="paymentOption" class="form-select" required>
                         <option value="">-- Seleccione una opción --</option>
                         <option value="pago_efectivo" {{ $nomina->empleado->metodo_pago == 'pago_efectivo' ? 'selected' : '' }}>Pago en efectivo {{ $nomina->empleado->metodo_pago == 'pago_efectivo' ? '(Seleccion del cliente)' : '' }}</option>
-                        <option value="transferencia_bancaria" {{ $nomina->empleado->metodo_pago == 'transferencia_bancaria' ? 'selected' : '' }}>Transferencia bancaria {{ $nomina->empleado->metodo_pago == 'transferencia_bancaria' ? '(Seleccion del cliente)' : '' }}</option>
+                        <option value="transferencia" {{ $nomina->empleado->metodo_pago == 'transferencia' ? 'selected' : '' }}>Transferencia bancaria {{ $nomina->empleado->metodo_pago == 'transferencia' ? '(Seleccion del cliente)' : '' }}</option>
                         <option value="cheque_bancario" {{ $nomina->empleado->metodo_pago == 'cheque_bancario' ? 'selected' : '' }}>Cheque bancario {{ $nomina->empleado->metodo_pago == 'cheque_bancario' ? '(Seleccion del cliente)' : '' }}</option>
                         <option value="pago_especie" {{ $nomina->empleado->metodo_pago == 'pago_especie' ? 'selected' : '' }}>Pago en especie (bonos o vales) {{ $nomina->empleado->metodo_pago == 'pago_especie' ? '(Seleccion del cliente)' : '' }}</option>
                     </select>
@@ -189,6 +190,7 @@
         </form>
     </div>
 </div>
+@endisset
 <script>
     // Función para seleccionar o deseleccionar todos los checkboxes
     function toggleSelectAll(source) {

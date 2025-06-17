@@ -308,7 +308,7 @@
                             </label> 
                             <select id="metodo_pago" name="metodo_pago" class="form-control" required>
                                 <option value="pago_efectivo">Pago en efectivo</option>
-                                <option value="transferencia_bancaria">Transferencia bancaria</option>
+                                <option value="transferencia">Transferencia bancaria</option>
                                 <option value="cheque_bancario">Cheque bancario</option>
                                 <option value="pago_especie">Pago en especie (bonos o vales)</option>
                             </select>

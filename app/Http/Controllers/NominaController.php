@@ -210,7 +210,7 @@ class NominaController extends Controller
 
 
         $request->validate([
-            'paymentOption' => 'required|string|in:transferencia_bancaria,pago_efectivo,cheque_bancario,pago_especie',
+            'paymentOption' => 'required|string|in:transferencia,pago_efectivo,cheque_bancario,pago_especie',
         ]);
 
         Log::info('Mondongo2');
@@ -242,10 +242,14 @@ class NominaController extends Controller
 
         $progreso = $total > 0 ? round(($liquidadas / $total) * 100, 2) : 0;
         $liquidacion->progreso = $progreso;
+        
+        if ($progreso >= 100) {
+            $liquidacion->estado = 'Liquidado';
+        }
+        
+        
         $liquidacion->save();
-
         Log::info('Mondong7');
-
 
         // Crear el pago automáticamente
         $pago = Pago::create(attributes: [

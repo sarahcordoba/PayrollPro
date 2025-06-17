@@ -32,7 +32,7 @@ $areas = [
 
 $metodosPago = [
 'pago_efectivo' => 'Pago en efectivo',
-'transferencia_bancaria' => 'Transferencia bancaria',
+'transferencia' => 'Transferencia bancaria',
 'cheque_bancario' => 'Cheque bancario',
 'pago_especie' => 'Pago en especie (bonos o vales)',
 ];

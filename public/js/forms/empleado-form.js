@@ -393,8 +393,8 @@ document.addEventListener('DOMContentLoaded', function () {
             bancoSelect.value = '';
             numeroCuentaInput.value = '';
             tipoCuentaSelect.value = '';
-        } else if (paymentMethodSelect.value === 'transferencia_bancaria') {
-            // Si es "transferencia_bancaria", mostrar los campos de transferencia bancaria
+        } else if (paymentMethodSelect.value === 'transferencia') {
+            // Si es "transferencia", mostrar los campos de transferencia bancaria
             transferenciaInfo.style.display = 'block';
         } else {
             // Si no es ninguno de los anteriores, ocultar los campos de transferencia

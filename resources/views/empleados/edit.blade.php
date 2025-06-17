@@ -375,7 +375,7 @@
                             <select id="metodo_pago" name="metodo_pago" class="form-control" required>
                                 <option value="pago_efectivo" @if (old('metodo_pago', $empleado->metodo_pago) == 'pago_efectivo') selected @endif>Pago en
                                     efectivo</option>
-                                <option value="transferencia_bancaria" @if (old('metodo_pago', $empleado->metodo_pago) == 'transferencia_bancaria') selected @endif>
+                                <option value="transferencia" @if (old('metodo_pago', $empleado->metodo_pago) == 'transferencia') selected @endif>
                                     Transferencia bancaria</option>
                                 <option value="cheque_bancario" @if (old('metodo_pago', $empleado->metodo_pago) == 'cheque_bancario') selected @endif>Cheque
                                     bancario</option>

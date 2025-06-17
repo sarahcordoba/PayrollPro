@@ -75,7 +75,7 @@ class ComisionNominaController extends Controller
             ->delete();
 
         // Redireccionar a la página de edición de la nómina
-        return redirect()->route('nominas.edit', ['id' => $nomina_id])
+        return redirect()->route('nominas.edit', ['nomina' => $nomina_id])
             ->with('success', 'Comisión eliminada exitosamente.');
     }
 }

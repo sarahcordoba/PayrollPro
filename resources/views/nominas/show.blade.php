@@ -46,10 +46,11 @@
                                 margin-bottom: 0;
                             }
                         </style>
-                        <p>datos de la empresa</p>
-                        <p>nit</p>
-                        <p>direccion</p>
-                        <p>correo</p>
+                        <p><strong>Nombre de la empresa:</strong> PayrollPro S.A.S</p>
+                        <p><strong>NIT:</strong> 901.456.789-0</p>
+                        <p><strong>Dirección:</strong> Calle 45 # 26-32, Montería, Córdoba</p>
+                        <p><strong>Correo electrónico:</strong> contacto@payrollpro.com.co</p>
+
                     </div>
                     <div class="card">
                         <ul class="list-group list-group-flush">
@@ -181,8 +182,9 @@
 
 
                 @if($allow)
+                @if ($nomina->estado != 'Liquidado')
                 <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-primary btn-style">Editar</a>
-
+                @endif
                 @if ($nomina->estado != 'Liquidado')
                 <!-- Trigger Button -->
                 <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
@@ -211,7 +213,7 @@
                         <select name="paymentOption" id="paymentOption" class="form-select" required>
                             <option value="">-- Seleccione una opción --</option>
                             <option value="pago_efectivo" {{ $nomina->empleado->metodo_pago == 'pago_efectivo' ? 'selected' : '' }}>Pago en efectivo {{ $nomina->empleado->metodo_pago == 'pago_efectivo' ? '(Seleccion del cliente)' : '' }}</option>
-                            <option value="transferencia_bancaria" {{ $nomina->empleado->metodo_pago == 'transferencia_bancaria' ? 'selected' : '' }}>Transferencia bancaria {{ $nomina->empleado->metodo_pago == 'transferencia_bancaria' ? '(Seleccion del cliente)' : '' }}</option>
+                            <option value="transferencia" {{ $nomina->empleado->metodo_pago == 'transferencia' ? 'selected' : '' }}>Transferencia bancaria {{ $nomina->empleado->metodo_pago == 'transferencia' ? '(Seleccion del cliente)' : '' }}</option>
                             <option value="cheque_bancario" {{ $nomina->empleado->metodo_pago == 'cheque_bancario' ? 'selected' : '' }}>Cheque bancario {{ $nomina->empleado->metodo_pago == 'cheque_bancario' ? '(Seleccion del cliente)' : '' }}</option>
                             <option value="pago_especie" {{ $nomina->empleado->metodo_pago == 'pago_especie' ? 'selected' : '' }}>Pago en especie (bonos o vales) {{ $nomina->empleado->metodo_pago == 'pago_especie' ? '(Seleccion del cliente)' : '' }}</option>
                         </select>

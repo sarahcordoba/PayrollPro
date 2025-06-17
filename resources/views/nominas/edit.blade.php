@@ -18,10 +18,11 @@
                         margin-bottom: 0;
                     }
                 </style>
-                <p>datos de la empresa</p>
-                <p>nit</p>
-                <p>direccion</p>
-                <p>correo</p>
+                <p><strong>Nombre de la empresa:</strong> PayrollPro S.A.S</p>
+                <p><strong>NIT:</strong> 901.456.789-0</p>
+                <p><strong>Dirección:</strong> Calle 45 # 26-32, Montería, Córdoba</p>
+                <p><strong>Correo electrónico:</strong> contacto@payrollpro.com.co</p>
+
             </div>
             <div class="card">
                 <ul class="list-group list-group-flush">
@@ -142,7 +143,7 @@
                                     id="isPercentaged-{{ $deducciona->deduccion_id}}"
                                     name="esporcentajed[{{ $deducciona->deduccion_id}}]" value="1"
                                     {{ $deducciona->esporcentaje ? 'checked' : '' }}
-                                    @if (in_array($deducciona->deduccion_id, [1, 2, 3])) disabled @endif>
+                                    @if (in_array($deducciona->deduccion_id, [1])) disabled @endif>
                                 <label class="form-check-label" for="isPercentage-{{ $deducciona->deduccion_id}}">
                                     ¿Es porcentaje?
                                 </label>
@@ -152,7 +153,7 @@
                                 id="percentageInputd-{{ $deducciona->deduccion_id}}"
                                 name="porcentaje[{{ $deducciona->deduccion_id}}]"
                                 value="{{ $deducciona->esporcentaje ? $deducciona->monto * 100: '' }}"
-                                placeholder="Porcentaje (%)" @if (!$deducciona->esporcentaje || in_array($deducciona->deduccion_id, [1, 2, 3])) disabled @endif>
+                                placeholder="Porcentaje (%)" @if (!$deducciona->esporcentaje || in_array($deducciona->deduccion_id, [1])) disabled @endif>
                         </li>
 
                         <li class="list-group-item d-flex flex-column">
@@ -160,7 +161,7 @@
                             <input type="number" step="0.01" class="form-control mt-2"
                                 id="amountInputd-{{ $deducciona->deduccion_id}}" name="monto[{{ $deducciona->deduccion_id}}]"
                                 value="{{ !$deducciona->esporcentaje ? $deducciona->monto : '' }}"
-                                placeholder="Monto ($)" @if ($deducciona->esporcentaje || in_array($deducciona->deduccion_id, [1, 2, 3])) disabled @endif>
+                                placeholder="Monto ($)" @if ($deducciona->esporcentaje || in_array($deducciona->deduccion_id, [1])) disabled @endif>
                         </li>
                         <li class="list-group-item d-flex flex-column">
                             <form id="delete-deduccion-{{ $deducciona->deduccion_id }}"
@@ -186,7 +187,7 @@
         </div>
     </div>
     <div style="display:flex; justify-content: space-between;">
-        <a href="{{ route('nominas.show', $nomina->id) }}" class="btn btn-secondary btn-style">Cancelar</a>
+        <a href="{{ route('nominas.show', ['nomina' => $nomina->id, 'fromIndex' => true]) }}    " class="btn btn-secondary btn-style">Cancelar</a>
         <div style="display:flex; gap: .5rem;">
             <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-primary btn-style">Guardar</a>
         </div>

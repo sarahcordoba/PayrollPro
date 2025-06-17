@@ -143,7 +143,7 @@ class LiquidacionController extends Controller
 
         foreach ($nominas as $nomina) {
             $request = new Request([
-                'paymentOption' => 'transferencia_bancaria' // o cualquier otro valor válido
+                'paymentOption' => 'transferencia' // o cualquier otro valor válido
             ]);
 
             // Puedes envolver esto en un try-catch si quieres manejar errores
