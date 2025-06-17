@@ -99,7 +99,10 @@
                         <a href="{{ route('nominas.show', ['nomina' => $nomina->id, 'fromIndex' => true]) }}" class="btn btn-secondary btn-style">Ver Detalles</a>
                         <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary btn-style">Editar</a>
                         @if ($nomina->estado != 'Liquidado')
-                        <a href="{{ route('nominas.liquidar', $nomina->id) }}" class="btn btn-secondary btn-style">Liquidar</a>
+                        <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
+                            Liquidar
+                        </button>
+
                         @endif
                         <form id="formEliminarNomina{{ $nomina->id }}" action="{{ route('nominas.destroy', $nomina->id) }}" method="POST" class="form-eliminar-nomina">
                             @csrf
@@ -153,6 +156,37 @@
                 <button type="button" class="btn btn-primary btn-style" onclick="crearNominas()">Crear</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal Liquidar -->
+<div class="modal fade" id="modalLiquidar" tabindex="-1" aria-labelledby="modalLiquidarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="POST" action="{{ route('nominas.liquidar', $nomina->id) }}">
+            @csrf
+            @method('PUT') <!-- or POST depending on your route definition -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLiquidarLabel">Liquidar Nómina</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="paymentOption" class="form-label">Método de pago</label>
+                    <select name="paymentOption" id="paymentOption" class="form-select" required>
+                        <option value="">-- Seleccione una opción --</option>
+                        <option value="pago_efectivo" {{ $nomina->empleado->metodo_pago == 'pago_efectivo' ? 'selected' : '' }}>Pago en efectivo {{ $nomina->empleado->metodo_pago == 'pago_efectivo' ? '(Seleccion del cliente)' : '' }}</option>
+                        <option value="transferencia_bancaria" {{ $nomina->empleado->metodo_pago == 'transferencia_bancaria' ? 'selected' : '' }}>Transferencia bancaria {{ $nomina->empleado->metodo_pago == 'transferencia_bancaria' ? '(Seleccion del cliente)' : '' }}</option>
+                        <option value="cheque_bancario" {{ $nomina->empleado->metodo_pago == 'cheque_bancario' ? 'selected' : '' }}>Cheque bancario {{ $nomina->empleado->metodo_pago == 'cheque_bancario' ? '(Seleccion del cliente)' : '' }}</option>
+                        <option value="pago_especie" {{ $nomina->empleado->metodo_pago == 'pago_especie' ? 'selected' : '' }}>Pago en especie (bonos o vales) {{ $nomina->empleado->metodo_pago == 'pago_especie' ? '(Seleccion del cliente)' : '' }}</option>
+                    </select>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-style" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary btn-style">Confirmar Liquidación</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <script>
@@ -292,8 +326,8 @@
                             showToast("Nómina eliminada correctamente.");
 
                             setTimeout(() => {
-                            location.reload();
-                        }, 1000);
+                                location.reload();
+                            }, 1000);
                         } else {
                             showToast('Ocurrió un error al eliminar la nómina.', 'error');
                         }
