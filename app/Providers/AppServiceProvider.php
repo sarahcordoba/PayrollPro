@@ -23,14 +23,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        if (config('app.env') === 'production') {
+        if (app()->environment('production')) {
             URL::forceScheme('https');
         }
+    
 
-        if (env('APP_ENV') !== 'local') {
-            //para que funcione enviar correo cuando se monte a un servidor se quita
-            URL::forceScheme('https');
-        }
+        // if (env('APP_ENV') !== 'local') {
+        //     //para que funcione enviar correo cuando se monte a un servidor se quita
+        //     URL::forceScheme('https');
+        // }
 
         View::composer('*', function ($view) {
             /** @var \App\Models\User $user */ // <-- This PHPDoc hint is for Intelephense
