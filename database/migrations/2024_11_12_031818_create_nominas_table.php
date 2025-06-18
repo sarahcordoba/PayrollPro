@@ -12,8 +12,10 @@ class CreateNominasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('empleado_id');
             $table->unsignedBigInteger('idLiquidacion');
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            // $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->foreign('idLiquidacion')->references('id')->on('liquidaciones');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
+
 
             $table->string('metodopago', 15);
             $table->string('estado', 15);

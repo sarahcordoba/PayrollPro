@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $menuItems = [
                 ['name' => 'Inicio', 'url' => '/', 'icon' => 'bi bi-house-door', 'roles' => ['admin', 'rrhh', 'employee']],
                 ['name' => 'Empleados', 'url' => '/empleados', 'icon' => 'bi bi-person-lines-fill', 'roles' => ['admin', 'rrhh']],
-                ['name' => 'Liquidación', 'url' => '/liquidaciones', 'icon' => 'bi bi-cash', 'roles' => ['admin']],
+                ['name' => 'Liquidación', 'url' => '/liquidaciones', 'icon' => 'bi bi-cash', 'roles' => ['admin', 'rrhh']],
                 ['name' => 'Incapacidades', 'url' => '/incapacidades', 'icon' => 'bi bi-file-medical', 'roles' => ['admin', 'rrhh' ]],
                 ['name' => 'Pagos', 'url' => '/pagos', 'icon' => 'bi bi-receipt', 'roles' => ['admin', 'rrhh']]
             ];

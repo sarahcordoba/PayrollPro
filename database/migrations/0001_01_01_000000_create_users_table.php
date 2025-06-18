@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employeeId');
-            $table->foreign('employeeId')->references('id')->on('empleados');
+            $table->foreign('employeeId')->references('id')->on('empleados')->onDelete('cascade');
             $table->string('name');
             $table->enum('role', ['admin', 'rrhh', 'employee'])->default('employee');
             $table->string('email')->unique();

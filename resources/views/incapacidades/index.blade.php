@@ -13,9 +13,6 @@
     <div class="mede-div">
         <p>Revisa las incapacidades de tus empleados.</p>
     </div>
-    <div>
-        <a href="{{ route('incapacidades.create') }}" class="btn btn-primary btn-style">+ Nuevo empleado</a>
-    </div>
     <div class="body-empleado">
         <div class="empleado-body">
             <input type="text" id="search-input" class="form-control mb-3"

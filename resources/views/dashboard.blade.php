@@ -232,16 +232,16 @@
 
         <div class="summary">
             <div>
-                <p>Última liquidación</p>
-                <h5>{{ $user->last_payroll ?? '0' }}</h5>
-            </div>
-            <div>
-                <p>No. empleados</p>
+                <p>Correo</p>
                 <h5>{{ $user->email ?? '0' }}</h5>
             </div>
             <div>
-                <p>Total Pago</p>
-                <h5>{{ $user->status ?? '$100000000000' }}</h5>
+                <p>Rol</p>
+                <h5>{{ $user->role ?? '0' }}</h5>
+            </div>
+            <div>
+                <p>Fecha de Creación</p>
+                <h5>{{ $user->created_at ?? '$100000000000' }}</h5>
             </div>
             <div>
                 <a href="{{ route('liquidaciones.index') }}" class="button btn-style">Ir a liquidar</a>
