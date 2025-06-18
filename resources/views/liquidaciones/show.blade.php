@@ -271,6 +271,8 @@
                     const tbody = document.getElementById('tbody-nominas');
                     const tr = document.createElement('tr');
 
+                    console.log('Data: ', data);
+
                     const nombreCompleto = `${data.empleado.primer_nombre} ${data.empleado.segundo_nombre || ''} ${data.empleado.primer_apellido} ${data.empleado.segundo_apellido || ''}`.trim();
 
                     tr.innerHTML = `
