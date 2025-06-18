@@ -20,10 +20,10 @@ class CreateNominasTable extends Migration
             $table->string('metodopago', 15);
             $table->string('estado', 15);
 
-            $table->decimal('salario_base', 10, 2);
-            $table->decimal('total_deducciones', 10, 2)->default(0);
-            $table->decimal('total_comisiones', 10, 2)->default(0);
-            $table->decimal('total', 10, 2); // Salario neto después de deducciones y comisiones
+            $table->decimal('salario_base', 20, 2);
+            $table->decimal('total_deducciones', 20, 2)->default(0);
+            $table->decimal('total_comisiones', 20, 2)->default(0);
+            $table->decimal('total', 20, 2); // Salario neto después de deducciones y comisiones
         });
     }
 

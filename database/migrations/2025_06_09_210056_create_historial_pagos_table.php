@@ -12,9 +12,9 @@ class CreateHistorialPagosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('empleado_id');
             $table->unsignedBigInteger('nomina_id');
-            $table->decimal('total_devengado', 10, 2);
-            $table->decimal('total_deducciones', 10, 2);
-            $table->decimal('total_pagado', 10, 2);
+            $table->decimal('total_devengado', 20, 2);
+            $table->decimal('total_deducciones', 20, 2);
+            $table->decimal('total_pagado', 20, 2);
             $table->date('fecha_pago');
             $table->string('estado_pago')->default('pendiente');
             $table->timestamps();

@@ -13,7 +13,7 @@ class CreateComisionesTable extends Migration
             $table->string('tipo', 50);
             $table->string('descripcion', 255);
             $table->boolean('esporcentaje')->default(false);
-            $table->decimal('monto', 10, 2);
+            $table->decimal('monto', 20, 2);
             $table->boolean('obligatorio')->default(false);;
             $table->timestamps();
         });

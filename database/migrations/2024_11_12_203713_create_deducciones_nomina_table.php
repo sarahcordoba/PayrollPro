@@ -17,7 +17,7 @@ class CreateDeduccionesNominaTable extends Migration
             $table->foreign('deduccion_id')->references('id')->on('deducciones')->onDelete('cascade');
 
             $table->boolean('esporcentaje')->default(false);
-            $table->decimal('monto', 10, 2)->default(null);
+            $table->decimal('monto', 20, 2)->default(null);
         });
     }
 

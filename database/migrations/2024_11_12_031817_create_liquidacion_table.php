@@ -20,10 +20,10 @@ return new class extends Migration
             
             $table->integer('progreso'); // Estado de la liquidación, por ejemplo: "Pendiente", "Completado"
 
-            $table->decimal('salario', 10, 2); // Salario base del empleado para el período
-            $table->decimal('total_deducciones', 10, 2)->default(0); // Total de deducciones aplicadas
-            $table->decimal('total_comisiones', 10, 2)->default(0); // Total de comisiones aplicadas
-            $table->decimal('total', 10, 2); // Salario neto después de deducciones y comisiones
+            $table->decimal('salario', 20, 2); // Salario base del empleado para el período
+            $table->decimal('total_deducciones', 20, 2)->default(0); // Total de deducciones aplicadas
+            $table->decimal('total_comisiones', 20, 2)->default(0); // Total de comisiones aplicadas
+            $table->decimal('total', 20, 2); // Salario neto después de deducciones y comisiones
         
             $table->timestamps(); // Timestamps de creación y actualización
         });
