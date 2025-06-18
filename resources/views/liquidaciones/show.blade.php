@@ -3,6 +3,7 @@
 @section('title', 'Detalles Liquidación')
 
 @section('content')
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="container-liquidaciones">
@@ -96,19 +97,29 @@
                     <td>${{ number_format($nomina->total_comisiones, 2) }}</td>
                     <td>${{ number_format($nomina->total, 2) }}</td>
                     <td>
-                        <a href="{{ route('nominas.show', ['nomina' => $nomina->id, 'fromIndex' => true]) }}" class="btn btn-secondary btn-style">Ver Detalles</a>
-                        @if ($nomina->estado != 'Liquidado')
-                        <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary btn-style">Editar</a>
-                        <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
-                            Liquidar
-                        </button>
+                        @php
+                        /** @var \App\Models\User $user */   // <-- This PHPDoc hint is for Intelephense
+                            $user=Auth::user();
 
-                        @endif
-                        <form id="formEliminarNomina{{ $nomina->id }}" action="{{ route('nominas.destroy', $nomina->id) }}" method="POST" class="form-eliminar-nomina">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-style"><i class="bi bi-trash"></i></button>
-                        </form>
+
+                            $allow=$user->hasAnyRole(['rrhh','admin']) && $user->empleado->id != $nomina->empleado_id;
+                            @endphp
+                            <a href="{{ route('nominas.show', ['nomina' => $nomina->id, 'fromIndex' => true]) }}" class="btn btn-secondary btn-style">Ver Detalles</a>
+
+                            @if($allow)
+                            @if ($nomina->estado != 'Liquidado')
+                            <a href="{{ route('nominas.edit', $nomina->id) }}" class="btn btn-secondary btn-style">Editar</a>
+                            <button class="btn btn-primary btn-style" data-bs-toggle="modal" data-bs-target="#modalLiquidar">
+                                Liquidar
+                            </button>
+
+                            @endif
+                            <form id="formEliminarNomina{{ $nomina->id }}" action="{{ route('nominas.destroy', $nomina->id) }}" method="POST" class="form-eliminar-nomina">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-style"><i class="bi bi-trash"></i></button>
+                            </form>
+                            @endif
 
     </div>
     </td>

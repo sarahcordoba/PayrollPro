@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
         if (env('APP_ENV') !== 'local') {
             //para que funcione enviar correo cuando se monte a un servidor se quita
             URL::forceScheme('https');
