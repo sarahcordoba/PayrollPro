@@ -29,7 +29,21 @@
         return 'POST recibido con éxito';
     });
 
-
+    Route::get('/debug-https', function (\Illuminate\Http\Request $request) {
+        return response()->json([
+            'is_secure' => $request->isSecure(),
+            'url' => $request->fullUrl(),
+            'app_url' => config('app.url'),
+            'scheme' => $request->getScheme(),
+            'server_port' => $request->server('SERVER_PORT'),
+            'headers' => [
+                'x-forwarded-proto' => $request->header('x-forwarded-proto'),
+                'x-forwarded-host' => $request->header('x-forwarded-host'),
+                'x-forwarded-port' => $request->header('x-forwarded-port'),
+            ],
+        ]);
+    });
+    
 
     // Redirección raíz condicional según el rol del usuario
     Route::get('/', function () {
