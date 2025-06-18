@@ -18,6 +18,12 @@
     };
     use App\Models\Liquidacion;
 
+    Route::get('/test-cookie', function () {
+        session(['test' => 'value']);
+        return response()->json(['session' => session('test')]);
+    });
+    
+
     // Redirección raíz condicional según el rol del usuario
     Route::get('/', function () {
 
