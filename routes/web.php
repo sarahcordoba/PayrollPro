@@ -22,7 +22,14 @@
         session(['test' => 'value']);
         return response()->json(['session' => session('test')]);
     });
-    
+
+    Route::view('/test-form', 'test-login');
+
+    Route::post('/test-post', function () {
+        return 'POST recibido con éxito';
+    });
+
+
 
     // Redirección raíz condicional según el rol del usuario
     Route::get('/', function () {
