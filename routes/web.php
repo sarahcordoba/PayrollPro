@@ -111,4 +111,6 @@
     Route::get('api/getall/liquidaciones', [LiquidacionController::class, 'getLiquidaciones']);
     Route::post('api/add/nomina', [NominaController::class, 'store']);
 
-    require __DIR__ . '/auth.php';
+    Route::middleware('web')->group(function () {
+        require __DIR__ . '/auth.php';
+    });
