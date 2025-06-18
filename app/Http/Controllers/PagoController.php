@@ -70,6 +70,6 @@ class PagoController extends Controller
         $pago = Pago::findOrFail($id);
         $pago->delete();
 
-        return response()->json(['message' => 'Pago eliminado correctamente']);
+        return redirect()->route('pagos.index')->with('success', 'Pago eliminado con éxito.');
     }
 }

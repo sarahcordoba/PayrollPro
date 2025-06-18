@@ -330,7 +330,7 @@ $tiposTrabajador = [
                                                 data-total-devengado="{{ $nomina->pago->total_devengado }}"
                                                 data-total-deducciones="{{ $nomina->pago->total_deducciones }}"
                                                 data-total-pagado="{{ $nomina->pago->total_pagado }}"
-                                                data-estado-pago="{{ $nomina->pago->estado }}"
+                                                data-estado-pago="{{ $nomina->pago->estado_pago }}"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#modalDetallePago">
                                                 <i class="bi bi-receipt-cutoff"></i>
@@ -350,10 +350,12 @@ $tiposTrabajador = [
                     <div class="card sb-light shadow mt-3">
                         <div class="d-flex justify-content-between align-items-center px-3 mt-3 mb-3">
                             <h5 class="mb-0"><strong>Incapacidades</strong></h5>
-                            @if(!$profile)
+                            @if($profile)
                             <a href="{{ route('incapacidades.create') }}" class="btn btn-primary btn-style">Solicitar Incapacidad</a>
                             @endif
                         </div>
+
+                        
 
 
                         <div class="table-responsive px-3">

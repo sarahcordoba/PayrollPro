@@ -69,7 +69,7 @@ class IncapacidadController extends Controller
                 'estado' => 'Pendiente',
             ]);
 
-            return redirect()->route('incapacidades.index')->with('success', 'Incapacidad registrada exitosamente.');
+            return redirect()->route('empleados.showself')->with('success', 'Incapacidad registrada exitosamente.');
         } catch (\Exception $e) {
             Log::error('Error al registrar incapacidad: ' . $e->getMessage());
             return back()->withErrors(['error' => 'Ocurrió un error al guardar la incapacidad.']);
@@ -127,6 +127,6 @@ class IncapacidadController extends Controller
     {
         $incapacidad = Incapacidad::findOrFail($id);
         $incapacidad->delete();
-        return response()->json(['message' => 'Incapacidad eliminada correctamente']);
+        return redirect()->route('incapacidades.index')->with('success', 'Incapacidad eliminado con éxito.');
     }
 }

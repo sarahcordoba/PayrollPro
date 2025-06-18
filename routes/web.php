@@ -16,7 +16,7 @@
         DeduccionNominaController,
         PagoController
     };
-use App\Models\Liquidacion;
+    use App\Models\Liquidacion;
 
     // Redirección raíz condicional según el rol del usuario
     Route::get('/', function () {
@@ -44,8 +44,8 @@ use App\Models\Liquidacion;
     Route::get('/dashboard', function () {
         $user = Auth::user();
         $lastLiquid = Liquidacion::where('progreso', 100)
-        ->orderBy('fecha_inicio', 'desc')
-        ->first();
+            ->orderBy('fecha_inicio', 'desc')
+            ->first();
         return view('dashboard', compact('user', 'lastLiquid'));
     })->middleware(['auth', 'role:admin,rrhh'])->name('dashboard');
 
@@ -66,11 +66,21 @@ use App\Models\Liquidacion;
             'deducciones'    => DeduccionController::class,
             'bonificaciones' => ComisionController::class,
             'liquidaciones'  => LiquidacionController::class,
-            'incapacidades'  => IncapacidadController::class,
+            // 'incapacidades'  => IncapacidadController::class,
             'pagos'          => PagoController::class,
         ]);
     });
 
+    // Permitir a empleados crear incapacidades
+    Route::middleware(['auth', 'role:employee,rrhh,admin'])->group(function () {
+        Route::resources([
+            'incapacidades'  => IncapacidadController::class,
+        ]);
+    });
+
+    Route::middleware(['auth', 'role:employee'])->group(function () {
+        Route::get('/nominas/{nomina}', [NominaController::class, 'show'])->name('nominas.show');
+    });
 
     // Rutas personalizadas (acciones específicas)
     Route::put('/incapacidades/{id}/review', [IncapacidadController::class, 'review'])->name('incapacidades.review');
