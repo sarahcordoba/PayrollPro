@@ -1,4 +1,6 @@
-<?php
+<?
+ob_start();
+
 
 use Illuminate\Http\Request;
 
