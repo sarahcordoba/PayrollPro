@@ -78,7 +78,7 @@
         ]);
     });
 
-    Route::middleware(['auth', 'role:employee'])->group(function () {
+    Route::middleware(['auth', 'role:employee,rrhh,admin'])->group(function () {
         Route::get('/nominas/{nomina}', [NominaController::class, 'show'])->name('nominas.show');
     });
 
